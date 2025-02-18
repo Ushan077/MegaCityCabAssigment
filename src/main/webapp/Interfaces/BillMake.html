@@ -8,6 +8,9 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  
   <style>
     /* Global Styles */
     body {
@@ -130,7 +133,9 @@
   <!-- Top Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Employee Dashboard</a>
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-user-tie"></i> Employee Dashboard
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
               data-bs-target="#navbarNav" aria-controls="navbarNav" 
               aria-expanded="false" aria-label="Toggle navigation">
@@ -138,7 +143,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="EmployeeHome.html">Home</a>
+          <a class="nav-link" href="EmployeeHome.html">
+            <i class="fas fa-home"></i> Home
+          </a>
           <!-- Theme Selector Dropdown -->
           <select id="themeSelector" class="form-select form-select-sm">
             <option value="default">Default</option>
@@ -154,21 +161,25 @@
   <div class="container-fluid">
     <div class="row">
       <!-- Sidebar Navigation -->
-      <div class="col-md-2" id="sidebar">
-        <h5>Menu</h5>
-        <a href="EmployeeHome.html">Dashboard</a>
-        <a href="BillMake.html">Manage Bookings</a>
-        <a href="#">Reports</a>
-        <a href="LogoutServlet">Exit</a>
+      <div class="col-md-2 p-0" id="sidebar">
+        <h5><i class="fas fa-bars"></i> Menu</h5>
+        <a href="EmployeeHome.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="BillMake.html"><i class="fas fa-calendar-check"></i> Manage Bookings</a>
+        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+        <a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Exit</a>
       </div>
       
       <!-- Content Area -->
       <div class="col-md-10">
         <div class="content">
-          <h2 class="mb-3">Generate Bill</h2>
+          <h2 class="mb-3">
+            <i class="fas fa-file-invoice-dollar"></i> Generate Bill
+          </h2>
           
-          <!-- Booking Table -->
-          <h4>Available Bookings</h4>
+          <!-- Booking Table Section -->
+          <h4>
+            <i class="fas fa-calendar-alt"></i> Available Bookings
+          </h4>
           <table class="table table-bordered">
             <thead class="table-dark">
               <tr>
@@ -185,51 +196,55 @@
             </tbody>
           </table>
           
-          <!-- Bill Form -->
-          <h4 class="mt-4">Billing Details</h4>
+          <!-- Bill Form Section -->
+          <h4 class="mt-4">
+            <i class="fas fa-info-circle"></i> Billing Details
+          </h4>
           <form action="BillMakeServlet" method="post">
             <!-- Employee Information (Auto-filled) -->
             <div class="mb-3">
-              <label class="form-label">Employee Name:</label>
+              <label class="form-label"><i class="fas fa-user"></i> Employee Name:</label>
               <input type="text" class="form-control" id="employeeName" name="employeeName" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Employee ID:</label>
+              <label class="form-label"><i class="fas fa-id-badge"></i> Employee ID:</label>
               <input type="text" class="form-control" id="employeeID" name="employeeID" readonly>
             </div>
             
             <!-- Booking Information (Auto-filled) -->
             <div class="mb-3">
-              <label class="form-label">Booking ID:</label>
+              <label class="form-label"><i class="fas fa-hashtag"></i> Booking ID:</label>
               <input type="text" class="form-control" id="bookingID" name="bookingID" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Customer ID:</label>
+              <label class="form-label"><i class="fas fa-user-tag"></i> Customer ID:</label>
               <input type="text" class="form-control" id="customerID" name="customerID" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Vehicle:</label>
+              <label class="form-label"><i class="fas fa-car"></i> Vehicle:</label>
               <input type="text" class="form-control" id="vehicle" name="vehicle" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Kilometers Driven:</label>
+              <label class="form-label"><i class="fas fa-road"></i> Kilometers Driven:</label>
               <input type="number" class="form-control" id="kilometers" name="kilometers" required oninput="calculateTotal()">
             </div>
             <div class="mb-3">
-              <label class="form-label">Rate per KM:</label>
+              <label class="form-label"><i class="fas fa-dollar-sign"></i> Rate per KM:</label>
               <input type="number" class="form-control" id="perKmRate" name="perKmRate" readonly>
             </div>
             <div class="mb-3">
-              <label class="form-label">Total Amount:</label>
+              <label class="form-label"><i class="fas fa-calculator"></i> Total Amount:</label>
               <input type="number" class="form-control" id="amount" name="amount" readonly>
             </div>
             
-            <button type="submit" class="btn btn-success">Generate Bill</button>
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-file-invoice"></i> Generate Bill
+            </button>
           </form>
-        </div><!-- content -->
-      </div>
-    </div>
-  </div>
+        </div><!-- End content -->
+      </div><!-- End Content Column -->
+    </div><!-- End Row -->
+  </div><!-- End Container Fluid -->
   
   <script>
     // Utility function to read query parameter from URL
@@ -278,7 +293,7 @@
               <td>${booking.dropoff_location}</td>
               <td>
                 <button class="btn btn-primary btn-sm" onclick="selectBooking(${booking.id}, '${booking.customer_id}', '${booking.vehicle}')">
-                  Select
+                  <i class="fas fa-check"></i> Select
                 </button>
               </td>
             `;
@@ -317,8 +332,12 @@
     }
     
     // Theme selector event listener to handle three modes: Default, Dark, and Night
-    document.addEventListener("DOMContentLoaded", function() {
+    function initializePage() {
       loadEmployeeData();
+    }
+    
+    document.addEventListener("DOMContentLoaded", function() {
+      initializePage();
       
       const themeSelector = document.getElementById("themeSelector");
       themeSelector.addEventListener("change", function() {
@@ -332,7 +351,7 @@
       });
     });
     
-    // Also ensure loadEmployeeData is called if not already
+    // Also ensure loadEmployeeData is called on window load if not already
     window.onload = loadEmployeeData;
   </script>
   

@@ -4,7 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Reply</title>
+  <!-- Bootstrap CSS (v4.5.2) -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Custom Navbar CSS -->
+  <link rel="stylesheet" href="cusnav.css">
   <style>
     body {
       background-color: #f8f9fa;
@@ -18,19 +23,27 @@
       border-radius: 8px;
       box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
     }
+    /* Optional: Increase spacing for icons */
+    .icon {
+      margin-right: 0.5rem;
+      color: #0d6efd;
+    }
   </style>
 </head>
 <body>
   <div class="container">
-    <h2 id="complaintTitle" class="mb-4"></h2>
+    <h2 id="complaintTitle" class="mb-4">
+      <i class="fas fa-comment-dots icon"></i>
+      Admin Reply for Complaint #
+    </h2>
     
     <div id="complaintDetails" class="card mb-3">
       <div class="card-body">
-        <p><strong>User ID:</strong> <span id="userId"></span></p>
-        <p><strong>User Name:</strong> <span id="userName"></span></p>
-        <p><strong>Subject:</strong> <span id="subject"></span></p>
-        <p><strong>Description:</strong> <span id="description"></span></p>
-        <p><strong>Status:</strong> <span id="status"></span></p>
+        <p><strong><i class="fas fa-id-badge icon"></i>User ID:</strong> <span id="userId"></span></p>
+        <p><strong><i class="fas fa-user icon"></i>User Name:</strong> <span id="userName"></span></p>
+        <p><strong><i class="fas fa-tag icon"></i>Subject:</strong> <span id="subject"></span></p>
+        <p><strong><i class="fas fa-align-left icon"></i>Description:</strong> <span id="description"></span></p>
+        <p><strong><i class="fas fa-info-circle icon"></i>Status:</strong> <span id="status"></span></p>
       </div>
     </div>
 
@@ -38,11 +51,20 @@
     <form id="replyForm">
       <input type="hidden" name="complaint_id" id="complaint_id">
       <div class="form-group">
-        <label for="admin_reply">Admin Reply:</label>
+        <label for="admin_reply">
+          <i class="fas fa-reply icon"></i>
+          Admin Reply:
+        </label>
         <textarea class="form-control" name="admin_reply" id="admin_reply" rows="5" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">Submit Reply</button>
-      <a href="admin_complaints.html" class="btn btn-secondary">Back to Complaints</a>
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-paper-plane icon"></i>
+        Submit Reply
+      </button>
+      <a href="admin_complaints.html" class="btn btn-secondary">
+        <i class="fas fa-arrow-left icon"></i>
+        Back to Complaints
+      </a>
     </form>
   </div>
 
@@ -111,5 +133,8 @@
 
     document.addEventListener("DOMContentLoaded", populateComplaintDetails);
   </script>
+  
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

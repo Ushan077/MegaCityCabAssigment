@@ -8,6 +8,9 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
 
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
+
   <style>
     /* Global Styles */
     body {
@@ -163,7 +166,9 @@
   <!-- Top Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Employee Dashboard</a>
+      <a class="navbar-brand" href="#">
+        <i class="fas fa-user-tie"></i> Employee Dashboard
+      </a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
               data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
               aria-expanded="false" aria-label="Toggle navigation">
@@ -171,7 +176,9 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="EmployeeHome.html">Home</a>
+          <a class="nav-link" href="EmployeeHome.html">
+            <i class="fas fa-home"></i> Home
+          </a>
           <!-- Theme Selector Dropdown -->
           <select id="themeSelector" class="form-select form-select-sm">
             <option value="default">Default</option>
@@ -188,29 +195,46 @@
     <!-- Sidebar Navigation -->
     <div id="sidebar">
       <h5>Menu</h5>
-      <a href="EmployeeHome.html">Dashboard</a>
-      <a href="BillMake.html">Manage Bookings</a>
-      <a href="#">Reports</a>
-      <a href="LogoutServlet">Exit</a>
+      <a href="EmployeeHome.html">
+        <i class="fas fa-tachometer-alt"></i> Dashboard
+      </a>
+      <a href="BillMake.html">
+        <i class="fas fa-calendar-check"></i> Manage Bookings
+      </a>
+      <a href="LogoutServlet">
+        <i class="fas fa-sign-out-alt"></i> Exit
+      </a>
     </div>
 
     <!-- Content Area -->
     <div class="content flex-grow-1">
       <!-- User Information Card -->
       <div class="card p-3">
-        <h4>User Information</h4>
-        <p><strong>Name:</strong> <span id="userName">N/A</span></p>
-        <p><strong>ID:</strong> <span id="userID">N/A</span></p>
+        <h4>
+          <i class="fas fa-info-circle"></i> User Information
+        </h4>
+        <p>
+          <strong><i class="fas fa-user"></i> Name:</strong> 
+          <span id="userName">N/A</span>
+        </p>
+        <p>
+          <strong><i class="fas fa-id-card"></i> ID:</strong> 
+          <span id="userID">N/A</span>
+        </p>
       </div>
 
       <!-- Pending Bookings Card -->
       <div class="card p-3">
-        <h4>Pending Bookings</h4>
+        <h4>
+          <i class="fas fa-clock"></i> Pending Bookings
+        </h4>
         <p>No bookings found.</p>
       </div>
 
       <!-- Generate Bill Button -->
-      <a id="goToBillPage" href="BillMake.html" class="btn btn-primary">Generate Bill</a>
+      <a id="goToBillPage" href="BillMake.html" class="btn btn-primary">
+        <i class="fas fa-file-invoice"></i> Generate Bill
+      </a>
     </div>
   </div>
 

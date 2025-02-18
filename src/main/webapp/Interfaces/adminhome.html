@@ -6,80 +6,31 @@
   <title>Admin Home Page</title>
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
   <style>
-    /* Global Styles */
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #121212;
-      color: #e0e0e0;
-      margin: 0;
-      padding: 0;
-    }
-    
-    /* Navigation Bar */
-    .navbar {
-      background-color: #1f78d1;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-    }
-    .navbar-brand, .navbar-nav .nav-link {
-      color: #fff !important;
-      font-weight: 500;
-    }
-    
-    /* Sidebar styling */
-    .sidebar {
-      background-color: #2c2c2c;
-      color: #fff;
-      min-height: 100vh;
-      padding-top: 20px;
-      transition: background-color 0.3s ease;
-    }
-    .sidebar h5 {
-      margin-bottom: 1.5rem;
-    }
-    .sidebar a {
-      color: #fff;
-      padding: 10px 15px;
-      display: block;
-      text-decoration: none;
-      transition: background-color 0.3s ease, padding-left 0.3s ease;
-    }
-    .sidebar a:hover {
-      background-color: #3e3e3e;
-      padding-left: 20px;
-      text-decoration: none;
-    }
-    
-    /* Main Content Styling */
-    .content {
-      background-color: #1e1e1e;
-      padding: 30px;
-      border-radius: 8px;
-      margin-top: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
-    }
-    .content h2 {
-      border-bottom: 2px solid #1f78d1;
-      padding-bottom: 10px;
-      margin-bottom: 20px;
-    }
-    
-    /* Container Fluid overrides */
-    .container-fluid {
-      padding: 0;
-    }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-      .sidebar {
-        min-height: auto;
-        padding: 15px;
-      }
-      .content {
-        margin-top: 10px;
-        padding: 20px;
-      }
-    }
+ 
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: url('https://plus.unsplash.com/premium_photo-1737739963212-0cf511d7009c?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+}
+.content {
+  background-color: var(--content-bg);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-image: url('https://plus.unsplash.com/premium_photo-1737739963212-0cf511d7009c?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+  background-size: cover; 
+  background-position: center; 
+  background-attachment: fixed; 
+  color: #fff; 
+}
+
+  
   </style>
 </head>
 <body>
@@ -107,9 +58,9 @@
       </div>
       <!-- Main Content -->
       <div class="col-md-10 content">
+      <br>
         <h2>Welcome, Admin!</h2>
-        <p>This is your admin home page. Use the sidebar to navigate through different sections of the admin panel.</p>
-        <!-- Additional admin dashboard components can be added here -->
+        
       </div>
     </div>
   </div>
