@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Complaints List - Admin Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    /* Light Theme (Default) */
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --navbar-bg: #007bff;
+      --sidebar-bg: #f8f9fa;
+      --content-bg: #ffffff;
+      --table-bg: #ffffff;
+      --table-text: #000000;
+      --border-color: #dee2e6;
+    }
+    
+    /* Night Mode Theme */
+    .night-mode {
+      --bg-color: #121212;
+      --text-color: #ffffff; /* Updated to white */
+      --navbar-bg: #1f78d1;
+      --sidebar-bg: #2c2c2c;
+      --content-bg: #1e1e1e;
+      --table-bg: #1e1e1e;
+      --table-text: #ffffff;
+      --border-color: #3e3e3e;
+    }
+    
+    /* Global Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Navigation Bar */
+    .navbar {
+      background-color: var(--navbar-bg);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    }
+    .navbar-brand, .navbar-nav .nav-link {
+      color: #fff !important;
+      font-weight: 500;
+    }
+    
+    /* Sidebar Styling */
+    .sidebar {
+      background-color: var(--sidebar-bg);
+      color: var(--text-color);
+      min-height: 100vh;
+      padding-top: 20px;
+      transition: background-color 0.3s ease;
+    }
+    .sidebar h5 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .sidebar a {
+      color: var(--text-color);
+      padding: 10px 15px;
+      display: block;
+      text-decoration: none;
+      transition: background-color 0.3s ease, padding-left 0.3s ease;
+    }
+    .sidebar a:hover {
+      background-color: #3e3e3e;
+      padding-left: 20px;
+      text-decoration: none;
+    }
+    
+    /* Main Content Styling */
+    .content {
+      background-color: var(--content-bg);
+      padding: 30px;
+      border-radius: 8px;
+      margin-top: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      color: var(--text-color);
+    }
+    .content h2 {
+      border-bottom: 2px solid var(--navbar-bg);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    
+    /* Container Fluid Overrides */
+    .container-fluid {
+      padding: 0;
+    }
+    
+    /* Table Styling */
+    table {
+      background-color: var(--table-bg);
+      color: var(--table-text);
+    }
+    table th, table td {
+      border-color: var(--border-color);
+    }
+    
+    /* Responsive Adjustments */
+    @media (max-width: 768px) {
+      .sidebar {
+        min-height: auto;
+        padding: 15px;
+      }
+      .content {
+        margin-top: 10px;
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand navbar-dark">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <ul class="navbar-nav ml-auto">
+      <!-- Theme Toggle Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="themeDropdown" role="button" data-toggle="dropdown">
+          Theme
+        </a>
+        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="themeDropdown">
+          <a class="dropdown-item" href="#" onclick="setTheme('light')">Light</a>
+          <a class="dropdown-item" href="#" onclick="setTheme('night')">Night</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="Login.html">Logout</a>
+      </li>
+    </ul>
+  </nav>
+  
+  <div class="container-fluid">
+    <div class="row no-gutters">
+      <!-- Sidebar -->
+      <div class="col-md-2 sidebar">
+        <h5>Menu</h5>
+        <a href="adminhome.html">Dashboard</a>
+        <a href="usersmanage.html">Users</a>
+        <a href="managevehicles.html">Vehicles</a>
+        <a href="adminBillView.html">Bill Manage</a>
+        <a href="admin_complaints.html">Complaints</a>
+      </div>
+      <!-- Main Content -->
+      <div class="col-md-10 content">
+        <h2>Complaints List</h2>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover" id="complaintsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>User ID</th>
+                <th>User Name</th>
+                <th>Subject</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Rows will be added dynamically -->
+            </tbody>
+          </table>
+        </div>
+        <p id="rowCount"></p>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Fetch complaints data from the servlet and populate the table
+    function loadComplaints() {
+      fetch("GetComplaintsServlet")
+        .then(response => response.json())
+        .then(data => {
+          const tbody = document.querySelector("#complaintsTable tbody");
+          tbody.innerHTML = ""; // Clear previous data
+          data.forEach(complaint => {
+            const tr = document.createElement("tr");
+            tr.innerHTML = `
+              <td>${complaint.complaint_id}</td>
+              <td>${complaint.user_id}</td>
+              <td>${complaint.user_name}</td>
+              <td>${complaint.subject}</td>
+              <td>${complaint.description}</td>
+              <td>${complaint.status}</td>
+              <td>
+                <a href="adminReply.html?complaint_id=${complaint.complaint_id}&user_id=${encodeURIComponent(complaint.user_id)}&user_name=${encodeURIComponent(complaint.user_name)}&subject=${encodeURIComponent(complaint.subject)}&description=${encodeURIComponent(complaint.description)}&status=${encodeURIComponent(complaint.status)}" 
+                   class="btn btn-primary btn-sm">
+                  Reply
+                </a>
+              </td>
+            `;
+            tbody.appendChild(tr);
+          });
+          document.getElementById("rowCount").textContent = "Rows returned: " + data.length;
+        })
+        .catch(error => {
+          console.error("Error loading complaints:", error);
+        });
+    }
+    
+    // Load complaints on DOMContentLoaded
+    document.addEventListener("DOMContentLoaded", loadComplaints);
+    
+    // Function to set the theme (light or night)
+    function setTheme(theme) {
+      const body = document.body;
+      // Remove any previously set theme classes
+      body.classList.remove("night-mode");
+      // For light mode, no extra class is added (default is light)
+      if (theme === "night") {
+        body.classList.add("night-mode");
+      }
+    }
+  </script>
+  
+  <!-- jQuery, Popper.js, and Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
