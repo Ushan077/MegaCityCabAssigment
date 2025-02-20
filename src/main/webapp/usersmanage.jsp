@@ -14,7 +14,7 @@
   
   <script>
     // Update this URL based on your deployment context.
-    const servletUrl = '/MegaCityCab/AdminServlet';
+   const servletUrl = '/MegaCityCabAssignment/AdminServlet';
 
     // Display a success message.
     function showSuccess(message) {
@@ -35,41 +35,44 @@
     }
 
     // Load users from the servlet and populate the table.
-    function loadUsers() {
-      fetch(servletUrl)
-        .then(response => {
-          if (!response.ok) {
-            return response.text().then(text => { throw new Error(text); });
-          }
-          return response.json();
-        })
-        .then(data => {
-          let tableBody = document.getElementById('usersTableBody');
-          tableBody.innerHTML = "";
-          if (data.length === 0) {
-            tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>No users found</td></tr>";
-          } else {
-            data.forEach(user => {
-              tableBody.innerHTML += `
-                <tr>
-                  <td>${user.nic}</td>
-                  <td>${user.name}</td>
-                  <td>${user.address}</td>
-                  <td>${user.contact}</td>
-                  <td>${user.usertype}</td>
-                  <td>
-                    <button class="btn btn-warning btn-sm" onclick="editUser('${user.nic}', '${user.name}', '${user.address}', '${user.contact}', '${user.usertype}')">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.nic}')">Delete</button>
-                  </td>
-                </tr>`;
-            });
-          }
-        })
-        .catch(error => {
-          console.error('Error loading users:', error);
-          showError("Error loading users: " + error.message);
+  function loadUsers() {
+  fetch(servletUrl)
+    .then(response => {
+      if (!response.ok) {
+        return response.text().then(text => { throw new Error(text); });
+      }
+      return response.json();
+    })
+    .then(data => {
+      console.log("Users data received:", data); // Debug log
+      let tableBody = document.getElementById('usersTableBody');
+      tableBody.innerHTML = "";
+      if (data.length === 0) {
+        tableBody.innerHTML = "<tr><td colspan='6' class='text-center'>No users found</td></tr>";
+      } else {
+        data.forEach(user => {
+          tableBody.innerHTML += `
+            <tr>
+              <td>${user.nic}</td>
+              <td>${user.name}</td>
+              <td>${user.address}</td>
+              <td>${user.contact}</td>
+              <td>${user.usertype}</td>
+              <td>
+                <button class="btn btn-warning btn-sm" onclick="editUser('${user.nic}', '${user.name}', '${user.address}', '${user.contact}', '${user.usertype}')">Edit</button>
+                <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.nic}')">Delete</button>
+              </td>
+            </tr>`;
         });
-    }
+      }
+    })
+    .catch(error => {
+      console.error('Error loading users:', error);
+      showError("Error loading users: " + error.message);
+    });
+}
+
+
 
     // Add a new user.
     function addUser(event) {
@@ -159,14 +162,14 @@
   <!-- Top Navigation Bar -->
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">Admin Dashboard</a>
+      <a class="navbar-brand" href="adminhome.html">Admin Dashboard</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#topNavbar" aria-controls="topNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="topNavbar">
         <ul class="navbar-nav ms-auto">
           <li class="nav-item">
-            <a class="nav-link" href="Login.html">Logout</a>
+            <a class="nav-link" href="Login.jsp">Logout</a>
           </li>
         </ul>
       </div>
@@ -195,48 +198,50 @@
           
           <!-- User Form -->
           <div class="mb-4">
-            <form id="userForm">
-              <input type="hidden" id="action" name="action" value="createCustomer" />
-              <div class="mb-3">
-                <label for="nic" class="form-label">NIC</label>
-                <input type="text" class="form-control" id="nic" name="nic" placeholder="NIC" required />
-              </div>
-              <div class="mb-3">
-                <label for="name" class="form-label">Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Name" required />
-              </div>
-              <div class="mb-3">
-                <label for="address" class="form-label">Address</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="Address" required />
-              </div>
-              <div class="mb-3">
-                <label for="contact" class="form-label">Contact</label>
-                <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact" required />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
-              </div>
-              <div class="mb-3">
-                <label for="usertype" class="form-label">User Type</label>
-                <select class="form-select" id="usertype" name="usertype">
-                  <option value="admin">Admin</option>
-                  <option value="user" selected>User</option>
-                  <option value="employee">Employee</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <button type="button" class="btn btn-success">
-                  <i class="fas fa-user-plus"></i> Add User
-                </button>
-                <button type="button" class="btn btn-primary">
-                  <i class="fas fa-user-edit"></i> Update User
-                </button>
-                <button type="reset" class="btn btn-secondary">
-                  <i class="fas fa-undo"></i> Reset
-                </button>
-              </div>
-            </form>
+           <form id="userForm">
+  <input type="hidden" id="action" name="action" value="createCustomer" />
+  
+  <div class="mb-3">
+    <label for="nic" class="form-label">NIC</label>
+    <input type="text" class="form-control" id="nic" name="nic" placeholder="NIC" required />
+  </div>
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name" required />
+  </div>
+  <div class="mb-3">
+    <label for="address" class="form-label">Address</label>
+    <input type="text" class="form-control" id="address" name="address" placeholder="Address" required />
+  </div>
+  <div class="mb-3">
+    <label for="contact" class="form-label">Contact</label>
+    <input type="text" class="form-control" id="contact" name="contact" placeholder="Contact" required />
+  </div>
+  <div class="mb-3">
+    <label for="password" class="form-label">Password</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Password" required />
+  </div>
+  <div class="mb-3">
+    <label for="usertype" class="form-label">User Type</label>
+    <select class="form-select" id="usertype" name="usertype">
+      <option value="admin">Admin</option>
+      <option value="user" selected>User</option>
+      <option value="employee">Employee</option>
+    </select>
+  </div>
+  <div class="mb-3">
+    <button type="button" class="btn btn-success" onclick="addUser(event)">
+      <i class="fas fa-user-plus"></i> Add User
+    </button>
+    <button type="button" class="btn btn-primary" onclick="updateUser(event)">
+      <i class="fas fa-user-edit"></i> Update User
+    </button>
+    <button type="reset" class="btn btn-secondary">
+      <i class="fas fa-undo"></i> Reset
+    </button>
+  </div>
+</form>
+ 	
           </div>
           
           <!-- Users Table -->
