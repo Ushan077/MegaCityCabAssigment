@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Admin Home Page</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+ 
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  background-image: url('https://plus.unsplash.com/premium_photo-1737739963212-0cf511d7009c?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed; 
+}
+.content {
+  background-color: var(--content-bg);
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-image: url('https://plus.unsplash.com/premium_photo-1737739963212-0cf511d7009c?q=80&w=2060&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+  background-size: cover; 
+  background-position: center; 
+  background-attachment: fixed; 
+  color: #fff; 
+}
+
+  
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand navbar-dark">
+    <a class="navbar-brand" href="#">Admin Dashboard</a>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="Login.html">Logout</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="container-fluid">
+    <div class="row no-gutters">
+      <!-- Sidebar -->
+      <div class="col-md-2 sidebar">
+        <h5 class="text-center">Menu</h5>
+        <a href="adminhome.html">Dashboard</a>
+        <a href="usersmanage.html">Users</a>
+        <a href="managevehicles.html">Vehicles</a>
+        <a href="adminBillView.html">Bill Manage</a>
+        <a href="admin_complaints.html">Complanits</a>
+      </div>
+      <!-- Main Content -->
+      <div class="col-md-10 content">
+      <br>
+        <h2>Welcome, Admin!</h2>
+        
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap and dependency scripts -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

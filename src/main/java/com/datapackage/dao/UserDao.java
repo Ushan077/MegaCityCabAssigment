@@ -1,57 +1,38 @@
 package com.datapackage.dao;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import com.datapackage.model.User;
+import java.sql.*;
 
 public class UserDao {
-
-    // Database connection details
-    private String url = "jdbc:mysql://localhost:3306/StudentDB";
-    private String user = "root";
-    private String password = "Mobitel#123";
+    private static final String LOGIN_QUERY = 
+        "SELECT id, name, usertype FROM users WHERE LOWER(name) = LOWER(?) AND password = ? AND LOWER(usertype) = LOWER(?)";
     
-    // SQL query to validate user credentials
-    private static final String VALIDATE_USER_QUERY = "SELECT * FROM Student WHERE F_name = ? AND password = ?";
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/megacitycab";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "Mobitel#123";
 
-    public boolean validateUser(String username, String password) throws ClassNotFoundException, SQLException {
-        Connection connection = null;
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-
+    public User validateUser(String username, String password, String usertype) {
+        User user = null;
         try {
-            // Load MySQL JDBC driver (optional for JDBC 4.0+ but added here for clarity)
             Class.forName("com.mysql.cj.jdbc.Driver");
-
-            // Establish a database connection
-            connection = DriverManager.getConnection(url, user, this.password);
-            
-            // Prepare the SQL statement
-            pstmt = connection.prepareStatement(VALIDATE_USER_QUERY);
-            pstmt.setString(1, username);
-            pstmt.setString(2, password); // Using plain text password
-
-            // Execute the query
-            rs = pstmt.executeQuery();
-
-            // If a record is found, then the user exists
-            return rs.next();
-        } catch (SQLException e) {
+            try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+                 PreparedStatement ps = con.prepareStatement(LOGIN_QUERY)) {
+                 
+                ps.setString(1, username);
+                ps.setString(2, password);
+                ps.setString(3, usertype);
+                
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String role = rs.getString("usertype");
+                    user = new User(id, name, role);
+                }
+            }
+        } catch (Exception e) {
             e.printStackTrace();
-            throw new SQLException("Database error: " + e.getMessage());
-        } finally {
-            // Clean up resources
-            if (rs != null) {
-                try { rs.close(); } catch (SQLException e) { e.printStackTrace(); }
-            }
-            if (pstmt != null) {
-                try { pstmt.close(); } catch (SQLException e) { e.printStackTrace(); }
-            }
-            if (connection != null) {
-                try { connection.close(); } catch (SQLException e) { e.printStackTrace(); }
-            }
         }
+        return user;
     }
 }

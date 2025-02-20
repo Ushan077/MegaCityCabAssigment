@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Customer Home</title>
+  
+  
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
+ 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+  
+  <link rel="stylesheet" href="cusnav.css">
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url('https://images.unsplash.com/photo-1501746655892-baf3ac230061?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
+      background-size: cover;
+      background-position: center;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Sidebar styling */
+    #sidebar {
+      min-width: 200px;
+      max-width: 250px;
+      background-color: #343a40;
+      min-height: 100vh;
+    }
+    #sidebar .nav-link {
+      color: #fff;
+    }
+    #sidebar .nav-link:hover {
+      background-color: #495057;
+    }
+    #sidebar .sidebar-heading {
+      color: #fff;
+      padding: 1rem;
+      font-size: 1.2rem;
+    }
+    /* Main content area */
+    .content {
+      flex: 1;
+      padding: 2rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    .help-box {
+      background: #fff;
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+      margin-top: 2rem;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    /* Theme Selector Dropdown (Bootstrap 4 styling) */
+    #themeSelector {
+      margin-left: 1rem;
+      padding: 0.2rem;
+      border-radius: 0.2rem;
+    }
+    
+    /* Dark Mode Overrides */
+    .dark-mode {
+      background-color: #343a40 !important;
+      color: #f8f9fa !important;
+    }
+    .dark-mode #sidebar {
+      background-color: #495057 !important;
+    }
+    .dark-mode .content,
+    .dark-mode .help-box {
+      background-color: #3a3a3a !important;
+      color: #f8f9fa !important;
+    }
+    
+    /* Night Mode Overrides */
+    .night-mode {
+      background-color: #121212 !important;
+      color: #e0e0e0 !important;
+    }
+    .night-mode #sidebar {
+      background-color: #1c1c1c !important;
+    }
+    .night-mode .content,
+    .night-mode .help-box {
+      background-color: #1f1f1f !important;
+      color: #e0e0e0 !important;
+    }
+    .background-box {
+  background-color: rgba(255, 255, 255, 0.8); /* White with slight transparency */
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px; /* Optional spacing below the box */
+}
+    
+  </style>
+</head>
+<body>
+  <!-- Top Navbar -->
+  <nav class="navbar navbar-dark bg-primary">
+    <a class="navbar-brand" href="#">
+      <i class="fas fa-user-circle"></i> Customer Dashboard
+    </a>
+    <div class="d-flex">
+      <a class="btn btn-outline-light mr-2" href="LogoutServlet">
+        <i class="fas fa-sign-out-alt"></i> Logout
+      </a>
+    
+    </div>
+  </nav>
+
+  <!-- Sidebar + Main Content Layout -->
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="sidebar-heading text-center mt-3">Menu</div>
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="cusbooking.html"><i class="fas fa-calendar-alt"></i> Manage Bookings</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="BillInfo.html"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="CusComplaint.html"><i class="fas fa-exclamation-circle"></i> Complaint</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="LogoutServlet"><i class="fas fa-door-open"></i> Exit</a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+  <div class="background-box">
+    <h2 class="text-primary">Welcome, <span id="usernameDisplay"></span>!</h2>
+    <hr />
+
+    <!-- Display user information -->
+    <div class="mb-3">
+      <strong>User ID:</strong> <span id="userIDDisplay">N/A</span>
+    </div>
+    <div class="mb-3">
+      <strong>Address:</strong> <span id="addressDisplay">Not Available</span>
+    </div>
+    <div class="mb-3">
+      <strong>Contact No:</strong> <span id="contactDisplay">Not Available</span>
+    </div>
+
+    <!-- Help Box -->
+    <div class="help-box">
+  <h4 class="text-success">User Help Manual</h4>
+<p class="text-muted">
+    <strong>User Guide: Booking Management</strong>
+</p>
+
+<p class="font-weight-bold text-primary">1. Create a New Booking</p>
+<p class="ml-3"><strong>Step 1:</strong> <span class="text-success">Auto-Generated Booking ID and Name</span></p>
+<p class="ml-4">When you begin the booking process, a Booking ID is automatically generated for you. This ID is unique and allows you to track your booking. You will also be prompted to enter your Name.</p>
+
+<p class="ml-3"><strong>Step 2:</strong> <span class="text-success">Enter Pickup Location</span></p>
+<p class="ml-4">Select or enter your Pickup Location in the provided field. This is where your vehicle will pick you up.</p>
+
+<p class="ml-3"><strong>Step 3:</strong> <span class="text-success">Enter Drop-off Location</span></p>
+<p class="ml-4">In the Drop-off Location field, enter the destination where you want to be dropped off.</p>
+
+<p class="ml-3"><strong>Step 4:</strong> <span class="text-success">Select Date</span></p>
+<p class="ml-4">Choose the Date for your booking. You can select a date from the calendar, which will automatically update the booking details.</p>
+
+<p class="ml-3"><strong>Step 5:</strong> <span class="text-success">Select Vehicle</span></p>
+<p class="ml-4">Choose the Vehicle you would like to use for your trip from the available options. Each vehicle may have different pricing and features, so make your selection based on your needs.</p>
+
+<p class="ml-3"><strong>Step 6:</strong> <span class="text-success">Confirm Booking</span></p>
+<p class="ml-4">Once all details are filled in, click on the "Book Now" button to finalize your booking.</p>
+
+<p class="font-weight-bold text-primary">2. View Bill Information</p>
+<p class="ml-3">After your booking is complete, you will have access to the Bill Information. To view it:</p>
+<ul class="ml-4">
+    <li>Navigate to the booking summary page.</li>
+    <li>Click on "Bill Information".</li>
+    <li>Here, you can see a breakdown of the total charges for your booking, including any additional fees or discounts.</li>
+</ul>
+
+<p class="font-weight-bold text-primary">3. Submit a Complaint</p>
+<p class="ml-3">If you experience any issues with your booking or service, you can file a complaint. Here’s how:</p>
+<ul class="ml-4">
+    <li>Locate the Complaints Section on your booking summary page.</li>
+    <li>Enter a Subject for your complaint, such as "Vehicle was late" or "Incorrect drop-off location".</li>
+    <li>In the Description field, provide more details about the issue you're facing.</li>
+    <li>Click on "Submit Complaint" to send your complaint to the support team.</li>
+</ul>
+
+<p class="font-weight-bold text-primary">4. View Responses to Complaints</p>
+<p class="ml-3">Once your complaint is submitted, you will be able to view the response from the support team:</p>
+<ul class="ml-4">
+    <li>Under the Complaint Section, look for the Responses area.</li>
+    <li>The response will be displayed, including any actions taken by the support team to resolve your issue.</li>
+    <li>If further action is needed, you may be asked to provide additional information or clarification.</li>
+</ul>
+
+
+    </div>
+  </div>
+</div>
+
+
+  <script>
+   
+    function getCookie(name) {
+      let cookies = document.cookie.split(";");
+      for (let i = 0; i < cookies.length; i++) {
+        let cookie = cookies[i].trim();
+        if (cookie.startsWith(name + "=")) {
+          return decodeURIComponent(cookie.substring(name.length + 1));
+        }
+      }
+      return "";
+    }
+
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      document.getElementById("userIDDisplay").textContent = getCookie("userID") || "N/A";
+      document.getElementById("usernameDisplay").textContent = getCookie("name") || "Guest";
+      document.getElementById("addressDisplay").textContent = getCookie("address") || "Not Available";
+      document.getElementById("contactDisplay").textContent = getCookie("contact") || "Not Available";
+
+      
+     
+    });
+  </script>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
