@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +9,7 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  
- 
   <link rel="stylesheet" href="styles.css">
-
-
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-dark">
@@ -78,14 +76,14 @@
           data.forEach(complaint => {
             const tr = document.createElement("tr");
             tr.innerHTML = `
-              <td>${complaint.complaint_id}</td>
-              <td>${complaint.user_id}</td>
-              <td>${complaint.user_name}</td>
+              <td>${complaint.complaintId}</td>
+              <td>${complaint.userId}</td>
+              <td>${complaint.userName}</td>
               <td>${complaint.subject}</td>
               <td>${complaint.description}</td>
               <td>${complaint.status}</td>
               <td>
-                <a href="adminReply.html?complaint_id=${complaint.complaint_id}" class="btn btn-primary btn-sm btn-reply">
+                <a href="adminReply.html?complaint_id=${complaint.complaintId}" class="btn btn-primary btn-sm btn-reply">
                   <i class="fas fa-reply"></i> Reply
                 </a>
               </td>
