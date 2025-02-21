@@ -6,7 +6,7 @@ public class Vehicle {
     private String vehicleName;
     private double price;
     
-    public Vehicle() {}
+    public Vehicle() { }
     
     public Vehicle(int id, String vehicleNo, String vehicleName, double price) {
         this.id = id;
