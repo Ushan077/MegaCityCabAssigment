@@ -9,8 +9,8 @@ public class Complaint {
     private String subject;
     private String description;
     private String status;
-    private Date dateFiled;      // Optional: the date the complaint was filed
-    private String adminReply;   // Optional: reply from admin
+    private Date dateFiled;
+    private String adminReply;
 
     public Complaint() {}
 

@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -186,7 +188,7 @@
       
       <!-- Complaint Form Container -->
       <div class="complaint-container">
-        <form id="complaintForm" action="ComplaintServlet" method="post">
+        <form id="complaintForm" action="ComplaintController" method="post">
           <!-- Hidden fields to send user info -->
           <input type="hidden" name="userID" id="userID" value="">
           <input type="hidden" name="userName" id="userName" value="">
@@ -312,3 +314,4 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+    
