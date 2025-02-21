@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +12,8 @@
   
   <script>
     // Adjust the context path as needed.
-    const servletUrl = window.location.origin + '/MegaCityCab/ManageVehicleServlet';
+   const servletUrl = window.location.origin + '/MegaCityCabAssignment/ManageVehicleServlet';
+
 
     // Display a success message.
     function showSuccess(message) {
