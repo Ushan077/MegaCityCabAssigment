@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="true"%>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -151,13 +153,13 @@
           <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="cusbooking.html"><i class="fas fa-calendar-alt"></i> Manage Bookings</a>
+          <a class="nav-link" href="cusbooking.jsp"><i class="fas fa-calendar-alt"></i> Manage Bookings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="BillInfo.html"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a>
+          <a class="nav-link" href="BillInfo.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="CusComplaint.html"><i class="fas fa-exclamation-circle"></i> Complaint</a>
+          <a class="nav-link" href="CusComplaint.jsp"><i class="fas fa-exclamation-circle"></i> Complaint</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="LogoutServlet"><i class="fas fa-door-open"></i> Exit</a>
@@ -166,16 +168,16 @@
     </div>
     
     <!-- Main Content -->
-<div class="content container-content">
-  <div class="background-box">
-    <h2 class="text-center mb-4">My Bill Information</h2>
-    <!-- Bill Cards Container -->
-    <div class="row" id="bill-list">
-      <!-- Bill cards will be inserted here dynamically -->
+    <div class="content container-content">
+      <div class="background-box">
+        <h2 class="text-center mb-4">My Bill Information</h2>
+        <!-- Bill Cards Container -->
+        <div class="row" id="bill-list">
+          <!-- Bill cards will be inserted here dynamically -->
+        </div>
+      </div>
     </div>
   </div>
-</div>
-
   
   <script>
     // Utility function to retrieve a cookie value by name.
@@ -199,8 +201,8 @@
         return;
       }
       
-      // Adjust the URL below to match your servlet mapping and context path if necessary.
-      fetch(`http://localhost:8082/MegaCityCab/FetchCustomerBillsServlet?customerID=${customerID}`)
+      // Adjust the URL below to match your servlet mapping and context path exactly.
+      fetch(`http://localhost:8082/MegaCityCabAssignment/FetchBillsJsonServlet?customerID=${customerID}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Network response was not ok: " + response.statusText);
@@ -215,15 +217,16 @@
           return;
         }
         bills.forEach(bill => {
-          // Create a card for each bill.
+          // Create a card for each bill using the correct JSON property names.
           const card = `
             <div class="col-md-4 mb-3">
               <div class="card h-100">
                 <div class="card-body">
                   <h5 class="card-title">Bill ID: ${bill.id}</h5>
-                  <p class="card-text"><strong>Employee Name:</strong> ${bill.employee_name}</p>
+                  <p class="card-text"><strong>Employee Name:</strong> ${bill.employeeName}</p>
                   <p class="card-text"><strong>Amount:</strong> $${parseFloat(bill.amount).toFixed(2)}</p>
-                  <p class="card-text"><strong>Date:</strong> ${bill.bill_date}</p>
+
+                  <p class="card-text"><strong>Date:</strong> ${bill.billDate}</p>
                 </div>
               </div>
             </div>
@@ -235,7 +238,7 @@
         console.error("Error fetching bills:", error);
         document.getElementById("bill-list").innerHTML = `<div class="col-12 text-center text-danger">Error loading bill data.</div>`;
       });
-  }
+    }
     
     // Initialize the page: load bills.
     function initializePage() {
