@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -161,7 +163,7 @@
     }
   </style>
 </head>
-<body onload="loadUserData()">
+<body onload="loadUserData(); loadBookings();">
 
   <!-- Top Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -228,7 +230,10 @@
         <h4>
           <i class="fas fa-clock"></i> Pending Bookings
         </h4>
-        <p>No bookings found.</p>
+        <!-- Container for dynamically loaded bookings -->
+        <div id="bookingContainer">
+          <p>No bookings found.</p>
+        </div>
       </div>
 
       <!-- Generate Bill Button -->
@@ -238,7 +243,7 @@
     </div>
   </div>
 
-  <!-- Script to Read Cookies, Display User Info, and Handle Theme Selection -->
+  <!-- Scripts -->
   <script>
     function getCookie(name) {
       const cookieArr = document.cookie.split(';');
@@ -258,22 +263,49 @@
       document.getElementById("userName").textContent = userName;
       document.getElementById("userID").textContent = userID;
 
-      // Ensure details persist in session
+      // Persist details in session storage
       sessionStorage.setItem("employeeName", userName);
       sessionStorage.setItem("employeeID", userID);
 
       // Pass details via URL to BillMake page
-      document.getElementById("goToBillPage").href = `BillMake.html?name=${userName}&id=${userID}`;
+      document.getElementById("goToBillPage").href = `BillMake.jsp]?name=${userName}&id=${userID}`;
     }
 
-    // Theme selector event listener
+    function loadBookings() {
+      fetch("FetchBookingsServlet")
+        .then(response => response.json())
+        .then(bookings => {
+          const bookingContainer = document.getElementById("bookingContainer");
+          if (bookings.length === 0) {
+            bookingContainer.innerHTML = "<p>No bookings found.</p>";
+          } else {
+            let html = "";
+            bookings.forEach(b => {
+              html += `
+                <div class="booking-card mb-2 p-2 border">
+                  <p><strong>Booking ID:</strong> ${b.bookingId}</p>
+                  <p><strong>Date:</strong> ${b.bookingDate}</p>
+                  <p><strong>Vehicle:</strong> ${b.vehicle}</p>
+                  <p><strong>Pickup:</strong> ${b.pickupLocation}</p>
+                  <p><strong>Dropoff:</strong> ${b.dropoffLocation}</p>
+                </div>
+              `;
+            });
+            bookingContainer.innerHTML = html;
+          }
+        })
+        .catch(error => {
+          console.error("Error fetching bookings:", error);
+          document.getElementById("bookingContainer").innerHTML = "<p>Error loading bookings.</p>";
+        });
+    }
+
     document.addEventListener("DOMContentLoaded", function() {
-      // Initialize user data
       loadUserData();
+      loadBookings();
       
       const themeSelector = document.getElementById("themeSelector");
       themeSelector.addEventListener("change", function() {
-        // Remove any existing theme classes
         document.body.classList.remove("dark-mode", "night-mode");
         if (this.value === "dark") {
           document.body.classList.add("dark-mode");

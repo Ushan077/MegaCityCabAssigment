@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect(contextPath + "/adminhome.html");
                 break;
             case "employee":
-                response.sendRedirect(contextPath + "/EmployeeHome.html");
+                response.sendRedirect(contextPath + "/EmployeeHome.jsp");
                 break;
             default:
                 response.sendRedirect(contextPath + "/CustomerHome.html");
