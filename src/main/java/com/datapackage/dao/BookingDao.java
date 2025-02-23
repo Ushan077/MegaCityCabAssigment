@@ -18,7 +18,7 @@ public class BookingDao {
         }
     }
     
-    
+    // Insert a new booking into the database.
     public int createBooking(Booking booking) throws SQLException {
         String sql = "INSERT INTO carbooking (booking_date, customer_id, vehicle, pickup_location, dropoff_location) VALUES (?, ?, ?, ?, ?)";
         try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
@@ -29,7 +29,6 @@ public class BookingDao {
             ps.setString(4, booking.getPickupLocation());
             ps.setString(5, booking.getDropoffLocation());
             int rowsAffected = ps.executeUpdate();
-            
            
             try (ResultSet rs = ps.getGeneratedKeys()) {
                 if (rs.next()) {
@@ -40,7 +39,7 @@ public class BookingDao {
         }
     }
     
-    // Retrieves all bookings from the database.
+    // Retrieve all bookings from the carbooking table.
     public List<Booking> getBookings() throws SQLException {
         List<Booking> bookings = new ArrayList<>();
         String sql = "SELECT id, booking_date, customer_id, vehicle, pickup_location, dropoff_location FROM carbooking";
@@ -55,7 +54,6 @@ public class BookingDao {
                 booking.setVehicle(rs.getString("vehicle"));
                 booking.setPickupLocation(rs.getString("pickup_location"));
                 booking.setDropoffLocation(rs.getString("dropoff_location"));
-                booking.setBookingDate(rs.getDate("booking_date"));
                 bookings.add(booking);
             }
         }

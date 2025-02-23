@@ -197,10 +197,10 @@
     <!-- Sidebar Navigation -->
     <div id="sidebar">
       <h5>Menu</h5>
-      <a href="EmployeeHome.html">
+      <a href="EmployeeHome.jsp">
         <i class="fas fa-tachometer-alt"></i> Dashboard
       </a>
-      <a href="BillMake.html">
+      <a href="BillMake.jsp">
         <i class="fas fa-calendar-check"></i> Manage Bookings
       </a>
       <a href="LogoutServlet">
@@ -230,14 +230,31 @@
         <h4>
           <i class="fas fa-clock"></i> Pending Bookings
         </h4>
-        <!-- Container for dynamically loaded bookings -->
-        <div id="bookingContainer">
-          <p>No bookings found.</p>
+        <!-- Display total count of bookings -->
+        <p id="bookingCount" class="mb-2">Total Bookings: 0</p>
+        <!-- Table for dynamically loaded bookings -->
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Date</th>
+                <th>Vehicle</th>
+                <th>Pickup</th>
+                <th>Dropoff</th>
+              </tr>
+            </thead>
+            <tbody id="bookingTableBody">
+              <tr>
+                <td colspan="5">No bookings found.</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
       <!-- Generate Bill Button -->
-      <a id="goToBillPage" href="BillMake.html" class="btn btn-primary">
+      <a id="goToBillPage" href="BillMake.jsp?name=N/A&id=N/A" class="btn btn-primary">
         <i class="fas fa-file-invoice"></i> Generate Bill
       </a>
     </div>
@@ -245,17 +262,19 @@
 
   <!-- Scripts -->
   <script>
+    // Helper function to get a cookie by name.
     function getCookie(name) {
       const cookieArr = document.cookie.split(';');
-      for (let i = 0; i < cookieArr.length; i++) {
-        let cookie = cookieArr[i].trim();
-        if (cookie.indexOf(name + "=") === 0) {
+      for (let cookie of cookieArr) {
+        cookie = cookie.trim();
+        if (cookie.startsWith(name + "=")) {
           return decodeURIComponent(cookie.substring(name.length + 1));
         }
       }
       return "";
     }
 
+    // Load user data from cookies and update the UI.
     function loadUserData() {
       const userName = getCookie("name") || "Guest";
       const userID = getCookie("userID") || "N/A";
@@ -263,47 +282,55 @@
       document.getElementById("userName").textContent = userName;
       document.getElementById("userID").textContent = userID;
 
-      // Persist details in session storage
+      // Save data to session storage for future use.
       sessionStorage.setItem("employeeName", userName);
       sessionStorage.setItem("employeeID", userID);
 
-      // Pass details via URL to BillMake page
-      document.getElementById("goToBillPage").href = `BillMake.jsp]?name=${userName}&id=${userID}`;
+      // Correct URL for BillMake page.
+      document.getElementById("goToBillPage").href = "BillMake.jsp?name=" + encodeURIComponent(userName) + "&id=" + encodeURIComponent(userID);
     }
 
+    // Fetch booking data from the server and populate the table.
     function loadBookings() {
-      fetch("FetchBookingsServlet")
-        .then(response => response.json())
-        .then(bookings => {
-          const bookingContainer = document.getElementById("bookingContainer");
-          if (bookings.length === 0) {
-            bookingContainer.innerHTML = "<p>No bookings found.</p>";
-          } else {
-            let html = "";
-            bookings.forEach(b => {
-              html += `
-                <div class="booking-card mb-2 p-2 border">
-                  <p><strong>Booking ID:</strong> ${b.bookingId}</p>
-                  <p><strong>Date:</strong> ${b.bookingDate}</p>
-                  <p><strong>Vehicle:</strong> ${b.vehicle}</p>
-                  <p><strong>Pickup:</strong> ${b.pickupLocation}</p>
-                  <p><strong>Dropoff:</strong> ${b.dropoffLocation}</p>
-                </div>
-              `;
-            });
-            bookingContainer.innerHTML = html;
-          }
-        })
-        .catch(error => {
-          console.error("Error fetching bookings:", error);
-          document.getElementById("bookingContainer").innerHTML = "<p>Error loading bookings.</p>";
+  fetch("FetchBookingsServlet")
+    .then(response => response.json())
+    .then(bookings => {
+      console.log("Fetched bookings:", bookings); // Debug log
+      
+      // Update booking count display.
+      document.getElementById("bookingCount").textContent = "Total Bookings: " + (bookings ? bookings.length : 0);
+      
+      const tableBody = document.getElementById("bookingTableBody");
+      if (!bookings || bookings.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5">No bookings found.</td></tr>`;
+      } else {
+        let html = "";
+        bookings.forEach(b => {
+          console.log("Booking data:", b); // Debug log for each booking
+          html += "<tr>";
+          html += "<td>" + (b.bookingId || "N/A") + "</td>";
+          html += "<td>" + (b.bookingDate || "N/A") + "</td>";
+          html += "<td>" + (b.vehicle || "N/A") + "</td>";
+          html += "<td>" + (b.pickupLocation || "N/A") + "</td>";
+          html += "<td>" + (b.dropoffLocation || "N/A") + "</td>";
+          html += "</tr>";
         });
-    }
+        tableBody.innerHTML = html;
+      }
+    })
+    .catch(error => {
+      console.error("Error fetching bookings:", error);
+      document.getElementById("bookingTableBody").innerHTML = `<tr><td colspan="5">Error loading bookings.</td></tr>`;
+    });
+}
 
+
+    // Initialize the page once the DOM is loaded.
     document.addEventListener("DOMContentLoaded", function() {
       loadUserData();
       loadBookings();
       
+      // Theme selector functionality.
       const themeSelector = document.getElementById("themeSelector");
       themeSelector.addEventListener("change", function() {
         document.body.classList.remove("dark-mode", "night-mode");
@@ -318,5 +345,11 @@
 
   <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
+  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+  <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+</footer>
+
 </body>
 </html>

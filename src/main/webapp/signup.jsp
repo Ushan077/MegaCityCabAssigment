@@ -290,5 +290,10 @@
       </div>
     </div>
   </div>
+  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
+  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+  <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+</footer>
+  
 </body>
 </html>

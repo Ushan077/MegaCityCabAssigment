@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,19 +22,12 @@
       padding: 0;
       transition: background-color 0.3s ease, color 0.3s ease;
     }
-    
     /* Top Navbar Styles */
     .navbar {
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
-    .navbar-nav .nav-link {
-      font-size: 1.1rem;
-      margin-right: 1rem;
-    }
+    .navbar-brand { font-weight: bold; font-size: 1.5rem; }
+    .navbar-nav .nav-link { font-size: 1.1rem; margin-right: 1rem; }
     
     /* Sidebar Styles */
     #sidebar {
@@ -42,26 +37,11 @@
       padding: 1.5rem 1rem;
       transition: background-color 0.3s ease;
     }
-    #sidebar h5 {
-      border-bottom: 1px solid #495057;
-      padding-bottom: 0.5rem;
-      margin-bottom: 1rem;
-    }
-    #sidebar a {
-      color: #fff;
-      text-decoration: none;
-      display: block;
-      padding: 0.5rem;
-      border-radius: 4px;
-      margin-bottom: 0.5rem;
-      transition: background-color 0.3s ease, padding-left 0.3s ease;
-    }
-    #sidebar a:hover {
-      background-color: #495057;
-      padding-left: 10px;
-    }
+    #sidebar h5 { border-bottom: 1px solid #495057; padding-bottom: 0.5rem; margin-bottom: 1rem; }
+    #sidebar a { color: #fff; text-decoration: none; display: block; padding: 0.5rem; border-radius: 4px; margin-bottom: 0.5rem; transition: background-color 0.3s ease, padding-left 0.3s ease; }
+    #sidebar a:hover { background-color: #495057; padding-left: 10px; }
     
-    /* Container and Content Area */
+    /* Content Area */
     .content {
       background-color: white;
       padding: 20px;
@@ -72,59 +52,33 @@
     }
     
     /* Table Styles */
-    table {
-      width: 100%;
-      margin-top: 20px;
-    }
-    th, td {
-      text-align: center;
-    }
-    
-    /* Night Mode Overrides */
-    .night-mode {
-      background-color: #121212 !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode .container, .night-mode .content {
-      background-color: #1f1f1f !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode table thead {
-      background-color: #1c1c1c !important;
-      color: #e0e0e0 !important;
-    }
-    
-    /* Dark Mode Overrides */
-    .dark-mode {
-      background-color: #343a40 !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode .container, .dark-mode .content {
-      background-color: #3a3a3a !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode table thead {
-      background-color: #495057 !important;
-      color: #f8f9fa !important;
-    }
+    table { width: 100%; margin-top: 20px; }
+    th, td { text-align: center; }
     
     /* Theme Selector Dropdown */
-    #themeSelector {
-      width: auto;
-      margin-left: 1rem;
+    #themeSelector { width: auto; margin-left: 1rem; }
+    
+    @media (max-width: 768px) {
+      .d-flex { flex-direction: column; }
+      #sidebar { min-height: auto; }
+      .content { margin: 1rem; }
     }
     
-    /* Responsive Adjustments */
-    @media (max-width: 768px) {
-      .d-flex {
-        flex-direction: column;
-      }
-      #sidebar {
-        min-height: auto;
-      }
-      .content {
-        margin: 1rem;
-      }
+    /* Footer Styles */
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 0;
+      margin-top: 20px;
+    }
+    footer hr {
+      border-top: 1px solid #fff;
+      margin-bottom: 10px;
+    }
+    footer p {
+      margin: 0;
+      text-align: center;
+      font-size: 0.9rem;
     }
   </style>
 </head>
@@ -133,9 +87,7 @@
   <!-- Top Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <i class="fas fa-user-tie"></i> Employee Dashboard
-      </a>
+      <a class="navbar-brand" href="#"><i class="fas fa-user-tie"></i> Employee Dashboard</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
               data-bs-target="#navbarNav" aria-controls="navbarNav" 
               aria-expanded="false" aria-label="Toggle navigation">
@@ -143,10 +95,7 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <div class="navbar-nav ms-auto">
-          <a class="nav-link" href="EmployeeHome.html">
-            <i class="fas fa-home"></i> Home
-          </a>
-          <!-- Theme Selector Dropdown -->
+          <a class="nav-link" href="EmployeeHome.jsp"><i class="fas fa-home"></i> Home</a>
           <select id="themeSelector" class="form-select form-select-sm">
             <option value="default">Default</option>
             <option value="dark">Dark Mode</option>
@@ -157,34 +106,30 @@
     </div>
   </nav>
   
-  <!-- Main Layout with Sidebar and Content -->
+  <!-- Main Layout -->
   <div class="container-fluid">
     <div class="row">
-      <!-- Sidebar Navigation -->
+      <!-- Sidebar -->
       <div class="col-md-2 p-0" id="sidebar">
         <h5><i class="fas fa-bars"></i> Menu</h5>
-        <a href="EmployeeHome.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-        <a href="BillMake.html"><i class="fas fa-calendar-check"></i> Manage Bookings</a>
-        <a href="#"><i class="fas fa-chart-line"></i> Reports</a>
+        <a href="EmployeeHome.jsp"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+        <a href="BillMake.jsp"><i class="fas fa-calendar-check"></i> Manage Bookings</a>
         <a href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Exit</a>
       </div>
       
-      <!-- Content Area -->
+      <!-- Content -->
       <div class="col-md-10">
         <div class="content">
-          <h2 class="mb-3">
-            <i class="fas fa-file-invoice-dollar"></i> Generate Bill
-          </h2>
+          <h2 class="mb-3"><i class="fas fa-file-invoice-dollar"></i> Generate Bill</h2>
           
           <!-- Booking Table Section -->
-          <h4>
-            <i class="fas fa-calendar-alt"></i> Available Bookings
-          </h4>
+          <h4><i class="fas fa-calendar-alt"></i> Available Bookings</h4>
+          <p id="bookingCount" class="mb-2"></p>
           <table class="table table-bordered">
             <thead class="table-dark">
               <tr>
                 <th>Booking ID</th>
-                <th>Customer ID</th>
+                <th>Booking Date</th>
                 <th>Vehicle</th>
                 <th>Pickup</th>
                 <th>Dropoff</th>
@@ -197,11 +142,9 @@
           </table>
           
           <!-- Bill Form Section -->
-          <h4 class="mt-4">
-            <i class="fas fa-info-circle"></i> Billing Details
-          </h4>
+          <h4 class="mt-4"><i class="fas fa-info-circle"></i> Billing Details</h4>
           <form action="BillMakeServlet" method="post">
-            <!-- Employee Information (Auto-filled) -->
+            <!-- Employee Information -->
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-user"></i> Employee Name:</label>
               <input type="text" class="form-control" id="employeeName" name="employeeName" readonly>
@@ -210,8 +153,7 @@
               <label class="form-label"><i class="fas fa-id-badge"></i> Employee ID:</label>
               <input type="text" class="form-control" id="employeeID" name="employeeID" readonly>
             </div>
-            
-            <!-- Booking Information (Auto-filled) -->
+            <!-- Booking Information -->
             <div class="mb-3">
               <label class="form-label"><i class="fas fa-hashtag"></i> Booking ID:</label>
               <input type="text" class="form-control" id="bookingID" name="bookingID" readonly>
@@ -241,72 +183,64 @@
               <i class="fas fa-file-invoice"></i> Generate Bill
             </button>
           </form>
-        </div><!-- End content -->
-      </div><!-- End Content Column -->
-    </div><!-- End Row -->
-  </div><!-- End Container Fluid -->
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Footer: Web Down Line Bar -->
+  <footer class="mt-5">
+    <hr>
+    <p>&copy; 2023 MegaCityCab. All rights reserved.</p>
+  </footer>
   
   <script>
-    // Utility function to read query parameter from URL
+    // Utility: Get query parameter from URL
     function getQueryParam(name) {
       const urlParams = new URLSearchParams(window.location.search);
       return urlParams.get(name) || "";
     }
     
-    // Load Employee Data into the form fields
+    // Load employee data and bookings
     function loadEmployeeData() {
       document.getElementById("employeeName").value = sessionStorage.getItem("employeeName") || getQueryParam("name");
       document.getElementById("employeeID").value = sessionStorage.getItem("employeeID") || getQueryParam("id");
-      
-      fetchEmployeeBookings();
+      loadBookings();
     }
     
-    // Fetch available bookings via AJAX
-    function fetchEmployeeBookings() {
-      console.log("DEBUG: Fetching bookings...");
-      fetch("http://localhost:8082/MegaCityCab/FetchEmpBooking")
-        .then(response => {
-          console.log("DEBUG: Response received", response);
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+    // loadBookings: Fetch booking details and build the table with a Select button
+    function loadBookings() {
+      fetch("FetchBookingsServlet")
+        .then(response => response.json())
+        .then(bookings => {
+          console.log("Fetched bookings:", bookings);
+          document.getElementById("bookingCount").textContent = "Total Bookings: " + (bookings ? bookings.length : 0);
+          const tableBody = document.getElementById("bookingTableBody");
+          if (!bookings || bookings.length === 0) {
+            tableBody.innerHTML = "<tr><td colspan='6'>No bookings found.</td></tr>";
+          } else {
+            let html = "";
+            bookings.forEach(b => {
+              console.log("Booking data:", b);
+              html += "<tr>";
+              html += "<td>" + (b.bookingId || "N/A") + "</td>";
+              html += "<td>" + (b.bookingDate || "N/A") + "</td>";
+              html += "<td>" + (b.vehicle || "N/A") + "</td>";
+              html += "<td>" + (b.pickupLocation || "N/A") + "</td>";
+              html += "<td>" + (b.dropoffLocation || "N/A") + "</td>";
+              html += "<td><button class='btn btn-primary btn-sm' onclick='selectBooking(" + b.bookingId + ", " + b.customerId + ", \"" + b.vehicle + "\")'>Select</button></td>";
+              html += "</tr>";
+            });
+            tableBody.innerHTML = html;
           }
-          return response.json();
-        })
-        .then(data => {
-          console.log("DEBUG: Employee Bookings Data:", data);
-          const bookingTableBody = document.getElementById("bookingTableBody");
-          bookingTableBody.innerHTML = "";
-    
-          if (data.length === 0) {
-            console.warn("DEBUG: No bookings found.");
-            bookingTableBody.innerHTML = "<tr><td colspan='6'>No bookings available</td></tr>";
-            return;
-          }
-    
-          data.forEach(booking => {
-            const row = document.createElement("tr");
-            row.innerHTML = `
-              <td>${booking.id}</td>
-              <td>${booking.customer_id}</td>
-              <td>${booking.vehicle}</td>
-              <td>${booking.pickup_location}</td>
-              <td>${booking.dropoff_location}</td>
-              <td>
-                <button class="btn btn-primary btn-sm" onclick="selectBooking(${booking.id}, '${booking.customer_id}', '${booking.vehicle}')">
-                  <i class="fas fa-check"></i> Select
-                </button>
-              </td>
-            `;
-            bookingTableBody.appendChild(row);
-          });
         })
         .catch(error => {
-          console.error("ERROR: Fetching bookings failed:", error);
-          document.getElementById("bookingTableBody").innerHTML = "<tr><td colspan='6'>Error loading bookings</td></tr>";
+          console.error("Error fetching bookings:", error);
+          document.getElementById("bookingTableBody").innerHTML = "<tr><td colspan='6'>Error loading bookings.</td></tr>";
         });
     }
     
-    // When a booking is selected, auto-fill the corresponding fields
+    // When a booking is selected, auto-fill form fields and fetch the per KM price
     function selectBooking(bookingID, customerID, vehicleId) {
       document.getElementById("bookingID").value = bookingID;
       document.getElementById("customerID").value = customerID;
@@ -314,34 +248,41 @@
       fetchPrice(vehicleId);
     }
     
-    // Fetch the price per kilometer for the given vehicle
+    // fetchPrice: Fetch price from FetchPriceServlet, then update perKmRate field and recalc total
     function fetchPrice(vehicleId) {
-      fetch(`http://localhost:8082/MegaCityCab/FetchPriceServlet?id=${vehicleId}`)
-        .then(response => response.text())
+      fetch(`http://localhost:8082/MegaCityCabAssignment/FetchPriceServlet?id=${vehicleId}`)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          return response.text();
+        })
         .then(price => {
+          console.log("Price returned: ", price);
           document.getElementById("perKmRate").value = price;
           calculateTotal();
+        })
+        .catch(error => {
+          console.error("Error fetching price:", error);
         });
     }
     
-    // Calculate the total amount based on kilometers and rate
+    // calculateTotal: Calculate total amount based on kilometers and per KM rate
     function calculateTotal() {
       const km = parseFloat(document.getElementById("kilometers").value) || 0;
       const rate = parseFloat(document.getElementById("perKmRate").value) || 0;
       document.getElementById("amount").value = (km * rate).toFixed(2);
     }
     
-    // Theme selector event listener to handle three modes: Default, Dark, and Night
+    // initializePage: Entry point for loading employee data and bookings
     function initializePage() {
       loadEmployeeData();
     }
     
     document.addEventListener("DOMContentLoaded", function() {
       initializePage();
-      
       const themeSelector = document.getElementById("themeSelector");
       themeSelector.addEventListener("change", function() {
-        // Remove any existing theme classes
         document.body.classList.remove("dark-mode", "night-mode");
         if (this.value === "dark") {
           document.body.classList.add("dark-mode");
@@ -351,7 +292,6 @@
       });
     });
     
-    // Also ensure loadEmployeeData is called on window load if not already
     window.onload = loadEmployeeData;
   </script>
   

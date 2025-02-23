@@ -2,20 +2,14 @@ package com.datapackage.controller;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 import com.google.gson.Gson;
-import com.datapackage.dao.BookingDao;
 import com.datapackage.model.Booking;
 
 @WebServlet("/FetchEmpBooking")
@@ -30,11 +24,10 @@ public class FetchEmpBookingServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        // Set JSON response type
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
-        List<Booking> bookings = new ArrayList<Booking>();
+        List<Booking> bookings = new ArrayList<>();
         String sql = "SELECT id, customer_id, vehicle, pickup_location, dropoff_location FROM carbooking";
         
         try {
@@ -45,11 +38,11 @@ public class FetchEmpBookingServlet extends HttpServlet {
 
             while(rs.next()){
                 Booking booking = new Booking();
-                booking.setBookingId(rs.getInt("id"));  
-                booking.setCustomerId(rs.getInt("customer_id"));
+                booking.setBookingId(rs.getInt("id")); // Correct setter for bookingId
+                booking.setCustomerId(rs.getInt("customer_id")); // Matches getCustomerId/setCustomerId
                 booking.setVehicle(rs.getString("vehicle"));
-                booking.setPickupLocation(rs.getString("pickup_location"));
-                booking.setDropoffLocation(rs.getString("dropoff_location"));
+                booking.setPickupLocation(rs.getString("pickup_location")); // Correct setter for pickupLocation
+                booking.setDropoffLocation(rs.getString("dropoff_location")); // Correct setter for dropoffLocation
                 bookings.add(booking);
             }
             rs.close();
@@ -59,7 +52,6 @@ public class FetchEmpBookingServlet extends HttpServlet {
             e.printStackTrace();
         }
         
-        // Convert list to JSON and write output
         String json = new Gson().toJson(bookings);
         out.print(json);
         out.flush();

@@ -39,14 +39,14 @@ public class FetchBookingsServlet extends HttpServlet {
                 jsonArray.put(bookingJson);
             }
         } catch (SQLException e) {
+            // Log the exception and notify the client
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error.");
             return;
         }
 
-        PrintWriter out = response.getWriter();
-        out.print(jsonArray.toString());
-        out.flush();
+        try (PrintWriter out = response.getWriter()) {
+            out.print(jsonArray.toString());
+        }
     }
 }
-
