@@ -60,7 +60,7 @@ public class FetchPriceServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            response.getWriter().print("0");
+            response.getWriter().print("10");
         }
     }
 }

@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,7 +24,6 @@
       border-radius: 8px;
       box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
     }
-    /* Optional: Increase spacing for icons */
     .icon {
       margin-right: 0.5rem;
       color: #0d6efd;
@@ -61,29 +61,22 @@
         <i class="fas fa-paper-plane icon"></i>
         Submit Reply
       </button>
-      <a href="admin_complaints.html" class="btn btn-secondary">
+      <a href="admin_complaints.jsp" class="btn btn-secondary">
         <i class="fas fa-arrow-left icon"></i>
         Back to Complaints
       </a>
     </form>
   </div>
 
-
   <script>
-    /**
-     * Returns the value of the URL parameter specified by 'param'.
-     * Logs all URL parameters for debugging purposes.
-     */
+    // Helper: Get URL parameter value.
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
       console.log('URL Parameters:', Object.fromEntries(urlParams.entries()));
       return urlParams.get(param);
     }
 
-    /**
-     * Populates the complaint details on the page.
-     * If no complaint_id is found, displays an error message.
-     */
+    // Populate complaint details from URL parameters.
     function populateComplaintDetails() {
       const complaintId = getQueryParam("complaint_id");
       if (complaintId) {
@@ -99,16 +92,14 @@
       }
     }
 
-    /**
-     * Handles the reply form submission.
-     * Submits the admin reply via a POST request to the AdminReplyServlet.
-     */
+    // Handle form submission.
     document.getElementById("replyForm").addEventListener("submit", function(event) {
-      event.preventDefault(); // Prevent default form submission
+      event.preventDefault();
 
       const complaintId = document.getElementById("complaint_id").value;
       const adminReply = document.getElementById("admin_reply").value;
 
+      // Use backticks for a template literal to preserve the ${...} syntax.
       fetch("AdminReplyServlet", {
         method: "POST",
         headers: {
@@ -124,7 +115,7 @@
       })
       .then(data => {
         alert("Reply submitted successfully!");
-        window.location.href = "admin_complaints.html"; // Redirect back to complaints list
+        window.location.href = "admin_complaints.jsp";
       })
       .catch(error => {
         console.error("Error submitting reply:", error);
@@ -138,9 +129,8 @@
   <!-- Bootstrap JS Bundle -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
-  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-  <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
-</footer>
-  
+    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+  </footer>
 </body>
 </html>

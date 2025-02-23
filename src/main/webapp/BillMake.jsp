@@ -248,24 +248,25 @@
       fetchPrice(vehicleId);
     }
     
-    // fetchPrice: Fetch price from FetchPriceServlet, then update perKmRate field and recalc total
     function fetchPrice(vehicleId) {
-      fetch(`http://localhost:8082/MegaCityCabAssignment/FetchPriceServlet?id=${vehicleId}`)
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('Network response was not ok');
-          }
-          return response.text();
-        })
-        .then(price => {
-          console.log("Price returned: ", price);
-          document.getElementById("perKmRate").value = price;
-          calculateTotal();
-        })
-        .catch(error => {
-          console.error("Error fetching price:", error);
-        });
-    }
+    	  console.log("Fetching price for vehicleId:", vehicleId);
+    	  fetch(`http://localhost:8082/MegaCityCabAssignment/FetchPriceServlet?id=${vehicleId}`)
+    	    .then(response => {
+    	      if (!response.ok) {
+    	        throw new Error('Network response was not ok');
+    	      }
+    	      return response.text();
+    	    })
+    	    .then(price => {
+    	      console.log("Price returned: ", price);
+    	      document.getElementById("perKmRate").value = price;
+    	      calculateTotal();
+    	    })
+    	    .catch(error => {
+    	      console.error("Error fetching price:", error);
+    	    });
+    	}
+
     
     // calculateTotal: Calculate total amount based on kilometers and per KM rate
     function calculateTotal() {

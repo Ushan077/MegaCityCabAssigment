@@ -1,15 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" isELIgnored="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Bill Management - Admin Dashboard</title>
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <style>
-    /* styles.css */
     :root {
       --bg-color: #f4f6f9;
       --text-color: #333;
@@ -49,7 +50,7 @@
     
     .sidebar {
       background-color: var(--sidebar-bg);
-      color: var(--text-color);
+      color: #fff;
       min-height: 100vh;
       padding: 20px;
     }
@@ -123,6 +124,8 @@
                   <td>${bill.amount}</td>
                   <td>${bill.billDate}</td>
                   <td>
+                    
+                    </button>
                     <button class="btn btn-danger btn-sm" onclick="deleteBill(${bill.id})">
                       Delete
                     </button>
@@ -159,6 +162,7 @@
       }
     }
 
+
     // Toggle night mode theme
     function setTheme(theme) {
       document.body.classList.toggle("night-mode", theme === "night");
@@ -167,7 +171,6 @@
     // Load bills when the page loads
     document.addEventListener("DOMContentLoaded", loadBills);
   </script>
-  
 </head>
 <body>
   <!-- Navigation Bar -->
@@ -236,13 +239,65 @@
     </div>
   </div>
 
-  <!-- Bootstrap 5 JS -->
+  <!-- Update Bill Modal -->
+  <div class="modal fade" id="updateBillModal" tabindex="-1" aria-labelledby="updateBillModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <form id="updateBillForm" onsubmit="updateBill(event)">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="updateBillModalLabel">Update Bill</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <input type="hidden" id="updateBillId" name="id" />
+            <div class="mb-3">
+              <label for="updateEmployeeName" class="form-label">Employee Name</label>
+              <input type="text" class="form-control" id="updateEmployeeName" name="employee_name" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateEmployeeId" class="form-label">Employee ID</label>
+              <input type="number" class="form-control" id="updateEmployeeId" name="employee_id" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateBookingId" class="form-label">Booking ID</label>
+              <input type="number" class="form-control" id="updateBookingId" name="booking_id" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateCustomerId" class="form-label">Customer ID</label>
+              <input type="number" class="form-control" id="updateCustomerId" name="customer_id" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateVehicle" class="form-label">Vehicle</label>
+              <input type="text" class="form-control" id="updateVehicle" name="vehicle" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateKilometers" class="form-label">Kilometers</label>
+              <input type="number" step="0.01" class="form-control" id="updateKilometers" name="kilometers" required />
+            </div>
+            <div class="mb-3">
+              <label for="updatePerKmRate" class="form-label">Per KM Rate</label>
+              <input type="number" step="0.01" class="form-control" id="updatePerKmRate" name="per_km_rate" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateAmount" class="form-label">Amount</label>
+              <input type="number" step="0.01" class="form-control" id="updateAmount" name="amount" required />
+            </div>
+            <div class="mb-3">
+              <label for="updateBillDate" class="form-label">Bill Date</label>
+              <input type="date" class="form-control" id="updateBillDate" name="bill_date" required />
+            </div>
+          </div>
+          
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <!-- Bootstrap 5 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  
   <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
-  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-  <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
-</footer>
-  
+    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+  </footer>
 </body>
 </html>

@@ -63,18 +63,15 @@
     }
     
     /* Complaint form container */
-  .complaint-container {
-  background: #fff;
-  padding: 3rem 10rem; 
-  border-radius: 8px;
-  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
-  margin-top:2rem;
-  margin-left: 2rem;
-  margin-bottom: 2rem;
-  min-height: 400px;  
-}
+    .complaint-container {
+      background: #fff;
+      padding: 3rem 10rem; 
+      border-radius: 8px;
+      box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.1);
+      margin: 2rem;
+      min-height: 400px;  
+    }
 
-    
     /* Background Box for headers and table */
     .background-box {
       background-color: rgba(255, 255, 255, 0.9);
@@ -87,40 +84,6 @@
     /* Table responsiveness */
     .table-responsive {
       margin-top: 1rem;
-    }
-    
-    /* Dark Mode Overrides */
-    .dark-mode {
-      background-color: #343a40 !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode .navbar {
-      background-color: #495057 !important;
-    }
-    .dark-mode #sidebar {
-      background-color: #495057 !important;
-    }
-    .dark-mode .content,
-    .dark-mode .complaint-container {
-      background-color: #3a3a3a !important;
-      color: #f8f9fa !important;
-    }
-    
-    /* Night Mode Overrides */
-    .night-mode {
-      background-color: #121212 !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode .navbar {
-      background-color: #1c1c1c !important;
-    }
-    .night-mode #sidebar {
-      background-color: #1c1c1c !important;
-    }
-    .night-mode .content,
-    .night-mode .complaint-container {
-      background-color: #1f1f1f !important;
-      color: #e0e0e0 !important;
     }
     
     /* Theme Selector Dropdown (Bootstrap 4 styling) */
@@ -140,7 +103,6 @@
         <i class="fas fa-user-circle"></i> Customer Dashboard
       </a>
       <div class="d-flex align-items-center">
-        <!-- Theme Selector Dropdown can be added here if needed -->
         <a class="btn btn-outline-light mr-2" href="LogoutServlet">
           <i class="fas fa-sign-out-alt"></i> Logout
         </a>
@@ -155,16 +117,16 @@
       <div class="sidebar-heading text-center mt-3">Menu</div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          <a class="nav-link" href="CustomerHome.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="cusbooking.html"><i class="fas fa-calendar-alt"></i> Manage Bookings</a>
+          <a class="nav-link" href="cusbooking.jsp"><i class="fas fa-calendar-alt"></i> Manage Bookings</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="BillInfo.html"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a>
+          <a class="nav-link" href="BillInfo.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="CusComplaint.html"><i class="fas fa-exclamation-circle"></i> Complaint</a>
+          <a class="nav-link" href="CusComplaint.jsp"><i class="fas fa-exclamation-circle"></i> Complaint</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="LogoutServlet"><i class="fas fa-door-open"></i> Exit</a>
@@ -173,69 +135,71 @@
     </div>
     
     <div class="complaint-container">
-    <div class="content">
-      <h2 class="text-primary mb-4">File a Complaint</h2>
-      
-      
-      <div class="mb-3">
-        <label><strong>User ID:</strong></label>
-        <span id="userIDDisplay">N/A</span>
-      </div>
-      <div class="mb-3">
-        <label><strong>Name:</strong></label>
-        <span id="usernameDisplay">Guest</span>
-      </div>
-      
-      <!-- Complaint Form Container -->
-      <div class="complaint-container">
-        <form id="complaintForm" action="ComplaintController" method="post">
-          <!-- Hidden fields to send user info -->
-          <input type="hidden" name="userID" id="userID" value="">
-          <input type="hidden" name="userName" id="userName" value="">
-          
-          <div class="form-group">
-            <label for="subject">Subject:</label>
-            <input type="text" class="form-control" name="subject" id="subject" placeholder="Enter complaint subject" required>
-          </div>
-          <div class="form-group">
-            <label for="description">Complaint Details:</label>
-            <textarea class="form-control" name="description" id="description" rows="5" placeholder="Describe your issue" required></textarea>
-          </div>
-          <button type="submit" class="btn btn-primary">Submit Complaint</button>
-        </form>
-      </div>
-      
-      <!-- Section to view admin replies for user's complaints wrapped in a background box -->
-      <div id="adminReplySection" class="background-box">
-        <h4 class="text-success">Admin Replies</h4>
-        <div class="table-responsive">
-          <table class="table table-bordered" id="adminRepliesTable">
-            <thead>
-              <tr>
-                <th>Complaint ID</th>
-                <th>Subject</th>
-                <th>Admin Reply</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Rows will be inserted dynamically -->
-              <tr>
-                <td colspan="4" class="text-center">Loading admin replies...</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="content">
+        <h2 class="text-primary mb-4">File a Complaint</h2>
+        
+        <div class="mb-3">
+          <label><strong>User ID:</strong></label>
+          <span id="userIDDisplay">N/A</span>
         </div>
+        <div class="mb-3">
+          <label><strong>Name:</strong></label>
+          <span id="usernameDisplay">Guest</span>
+        </div>
+        
+        <!-- Complaint Form Container -->
+        <div class="complaint-container">
+          <form id="complaintForm" action="ComplaintController" method="post">
+            <!-- Hidden fields to send user info -->
+            <input type="hidden" name="userID" id="userID" value="">
+            <input type="hidden" name="userName" id="userName" value="">
+            
+            <div class="form-group">
+              <label for="subject">Subject:</label>
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Enter complaint subject" required>
+            </div>
+            <div class="form-group">
+              <label for="description">Complaint Details:</label>
+              <textarea class="form-control" name="description" id="description" rows="5" placeholder="Describe your issue" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit Complaint</button>
+          </form>
+        </div>
+        
+        <!-- Section to view admin replies for user's complaints -->
+        <div id="adminReplySection" class="background-box">
+          <h4 class="text-success">Admin Replies</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered" id="adminRepliesTable">
+              <thead>
+                <tr>
+                  <th>Complaint ID</th>
+                  <th>Subject</th>
+                  <th>Admin Reply</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Table body will be populated dynamically -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        
       </div>
-      
     </div>
   </div>
   
   <!-- Scripts -->
+  <!-- Include jQuery before Bootstrap JS (Bootstrap 4 dependency) -->
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+  
   <!-- Helper: Retrieve cookie by name -->
   <script>
     function getCookie(name) {
-      let cookies = document.cookie.split(";");
+      const cookies = document.cookie.split(";");
       for (let i = 0; i < cookies.length; i++) {
         let cookie = cookies[i].trim();
         if (cookie.indexOf(name + "=") === 0) {
@@ -246,7 +210,7 @@
     }
   </script>
   
-  <!-- Main Script: Populate fields, theme switching, and admin replies fetching -->
+  <!-- Main Script: Populate fields and load admin replies -->
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       // Populate user details from cookies
@@ -261,7 +225,6 @@
       loadUserAdminReplies();
     });
     
-    // Function to fetch and display admin replies in the table
     function loadUserAdminReplies() {
       const userID = document.getElementById("userID").value;
       if (userID === "N/A" || !userID) {
@@ -286,22 +249,19 @@
             // Only display complaints that have an admin reply
             if (complaint.admin_reply && complaint.admin_reply.trim() !== "") {
               hasReplies = true;
-              const tr = document.createElement("tr");
-              tr.innerHTML = `
-                <td>${complaint.complaint_id}</td>
-                <td>${complaint.subject}</td>
-                <td>${complaint.admin_reply}</td>
-                <td>${complaint.status}</td>
+              tbody.innerHTML += `
+                <tr>
+                  <td>\${complaint.complaint_id}</td>
+                  <td>\${complaint.subject}</td>
+                  <td>\${complaint.admin_reply}</td>
+                  <td>\${complaint.status}</td>
+                </tr>
               `;
-              tbody.appendChild(tr);
             }
           });
           
-          // If no replies were found, display a placeholder row
           if (!hasReplies) {
-            const tr = document.createElement("tr");
-            tr.innerHTML = `<td colspan="4" class="text-center">No admin replies available</td>`;
-            tbody.appendChild(tr);
+            tbody.innerHTML = `<tr><td colspan="4" class="text-center">No admin replies available</td></tr>`;
           }
         })
         .catch(error => {
@@ -309,9 +269,5 @@
         });
     }
   </script>
-  
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-    

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page isELIgnored="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,8 +11,7 @@
   
   <script>
     // Adjust the context path as needed.
-   const servletUrl = window.location.origin + '/MegaCityCabAssignment/ManageVehicleServlet';
-
+    const servletUrl = window.location.origin + '/MegaCityCabAssignment/ManageVehicleServlet';
 
     // Display a success message.
     function showSuccess(message) {
@@ -157,7 +155,6 @@
   </script>
 </head>
 <body>
- 
   <nav class="navbar navbar-expand-lg">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Admin Dashboard</a>
@@ -177,30 +174,25 @@
 
   <div class="container-fluid">
     <div class="row">
-      
       <div class="col-md-2 sidebar">
         <h5 class="text-center text-white">Menu</h5>
         <a href="adminhome.html"><i class="fas fa-home"></i> Dashboard</a>
-        <a href="usersmanage.html"><i class="fas fa-users"></i> Users</a>
-        <a href="managevehicles.html"><i class="fas fa-car"></i> Vehicles</a>
-        <a href="adminBillView.html"><i class="fas fa-file-invoice-dollar"></i> Bill Manage</a>
-        <a href="admin_complaints.html"><i class="fas fa-exclamation-circle"></i> Complaints</a>
+        <a href="usersmanage.jsp"><i class="fas fa-users"></i> Users</a>
+        <a href="managevehivehicles.jsp"><i class="fas fa-car"></i> Vehicles</a>
+        <a href="adminBillView.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Manage</a>
+        <a href="admin_complaints.jsp"><i class="fas fa-exclamation-circle"></i> Complaints</a>
       </div>
 
-     
       <div class="col-md-10">
         <div class="main-content"><br>
           <h2 class="text-center" style="font-weight: bold;">
-  <i class="fas fa-car"></i> Vehicle Management
-</h2>
+            <i class="fas fa-car"></i> Vehicle Management
+          </h2>
 
-        
           <div id="alertMessage" style="display:none;"></div>
-          
           <hr>
          
           <form id="vehicleForm">
-           
             <input type="hidden" id="action" name="action" value="createVehicle">
             <input type="hidden" id="vehicleId" name="id" value="">
             
@@ -229,8 +221,6 @@
             </div>
           </form>
           
-          
-         
           <h4>Vehicles List</h4>
           <table class="table table-bordered">
             <thead>
@@ -243,7 +233,7 @@
               </tr>
             </thead>
             <tbody id="vehiclesTableBody">
-              
+              <!-- Dynamic rows will appear here -->
             </tbody>
           </table>
         </div>
@@ -253,10 +243,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-<footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
-  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-  <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
-</footer>
-
+  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
+    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+  </footer>
 </body>
 </html>

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -67,6 +66,7 @@
     </div>
   </div>
   <script>
+    // Load complaints via a fetch call to your GetComplaintsServlet
     function loadComplaints() {
       fetch("GetComplaintsServlet")
         .then(response => response.json())
@@ -74,6 +74,7 @@
           const tbody = document.querySelector("#complaintsTable");
           tbody.innerHTML = "";
           data.forEach(complaint => {
+            // Use a template literal (backticks) so that the complaint ID is inserted into the URL
             const tr = document.createElement("tr");
             tr.innerHTML = `
               <td>${complaint.complaintId}</td>
@@ -83,7 +84,8 @@
               <td>${complaint.description}</td>
               <td>${complaint.status}</td>
               <td>
-                <a href="adminReply.html?complaint_id=${complaint.complaintId}" class="btn btn-primary btn-sm btn-reply">
+                <a href="adminReply.jsp?complaint_id=${complaint.complaintId}&user_id=${complaint.userId}&user_name=${encodeURIComponent(complaint.userName)}&subject=${encodeURIComponent(complaint.subject)}&description=${encodeURIComponent(complaint.description)}&status=${encodeURIComponent(complaint.status)}" 
+                   class="btn btn-primary btn-sm btn-reply">
                   <i class="fas fa-reply"></i> Reply
                 </a>
               </td>
@@ -95,16 +97,17 @@
         .catch(error => console.error("Error loading complaints:", error));
     }
     document.addEventListener("DOMContentLoaded", loadComplaints);
+
+    // Simple theme toggle function
     function setTheme(theme) {
       document.body.classList.toggle("night-mode", theme === "night");
     }
   </script>
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
- <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
-  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-  <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
-</footer>
-
+  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
+    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+  </footer>
 </body>
 </html>

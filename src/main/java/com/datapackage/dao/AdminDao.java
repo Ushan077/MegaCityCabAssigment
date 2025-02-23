@@ -81,13 +81,13 @@ public class AdminDao {
              PreparedStatement ps = conn.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
-                customers.add(new Customer(
-                    rs.getString("nic"),
-                    rs.getString("name"),
-                    rs.getString("address"),
-                    rs.getString("contact"),
-                    rs.getString("usertype")
-                ));
+                String nic = rs.getString("nic");
+                String name = rs.getString("name");
+                String address = rs.getString("address");
+                String contact = rs.getString("contact");
+                String usertype = rs.getString("usertype");
+                System.out.println("Fetched User: " + nic + ", " + name + ", " + address + ", " + contact + ", " + usertype);
+                customers.add(new Customer(nic, name, address, contact, usertype));
             }
         }
         return customers;

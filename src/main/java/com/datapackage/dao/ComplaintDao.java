@@ -18,70 +18,53 @@ public class ComplaintDao {
         }
     }
 
-    // Retrieve all complaints ordered by date_filed descending
+    // Retrieve complaints by user ID
+    public List<Complaint> getComplaintsByUserId(String userId) throws SQLException {
+        List<Complaint> complaints = new ArrayList<>();
+        String sql = "SELECT * FROM Complaints WHERE user_id = ?";
+        try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, userId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Complaint complaint = new Complaint();
+                    complaint.setComplaintId(rs.getInt("complaint_id"));
+                    complaint.setUserId(rs.getString("user_id"));
+                    complaint.setUserName(rs.getString("user_name"));
+                    complaint.setSubject(rs.getString("subject"));
+                    complaint.setDescription(rs.getString("description"));
+                    complaint.setAdminReply(rs.getString("admin_reply"));
+                    complaint.setStatus(rs.getString("status"));
+                    complaint.setDateFiled(rs.getDate("date_filed")); // Using getDate for java.sql.Date
+                    complaints.add(complaint);
+                }
+            }
+        }
+        return complaints;
+    }
+ // In ComplaintDao.java
+
     public List<Complaint> getComplaints() throws SQLException {
         List<Complaint> complaints = new ArrayList<>();
-        String sql = "SELECT complaint_id, user_id, user_name, subject, description, status, date_filed, admin_reply " +
-                     "FROM Complaints ORDER BY date_filed DESC";
+        String sql = "SELECT * FROM Complaints"; // Removed WHERE clause to display all records
         try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
-            while(rs.next()){
-                Complaint comp = new Complaint();
-                comp.setComplaintId(rs.getInt("complaint_id"));
-                comp.setUserId(rs.getString("user_id"));
-                comp.setUserName(rs.getString("user_name"));
-                comp.setSubject(rs.getString("subject"));
-                comp.setDescription(rs.getString("description"));
-                comp.setStatus(rs.getString("status"));
-                comp.setDateFiled(rs.getDate("date_filed"));
-                comp.setAdminReply(rs.getString("admin_reply"));
-                
-                // Optional debug log (uncomment if needed)
-                // System.out.println("Complaint: " + comp.getComplaintId() + ", Subject: " + comp.getSubject());
-                
-                complaints.add(comp);
+            while (rs.next()) {
+                Complaint complaint = new Complaint();
+                complaint.setComplaintId(rs.getInt("complaint_id"));
+                complaint.setUserId(rs.getString("user_id"));
+                complaint.setUserName(rs.getString("user_name"));
+                complaint.setSubject(rs.getString("subject"));
+                complaint.setDescription(rs.getString("description"));
+                complaint.setAdminReply(rs.getString("admin_reply"));
+                complaint.setStatus(rs.getString("status"));
+                complaint.setDateFiled(rs.getDate("date_filed"));
+                complaints.add(complaint);
             }
         }
         return complaints;
     }
 
-    // Add a new complaint to the database
-    public int addComplaint(Complaint complaint) throws SQLException {
-        String sql = "INSERT INTO Complaints (user_id, user_name, subject, description, status, date_filed, admin_reply) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
-        try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            
-            ps.setString(1, complaint.getUserId());
-            ps.setString(2, complaint.getUserName());
-            ps.setString(3, complaint.getSubject());
-            ps.setString(4, complaint.getDescription());
-            ps.setString(5, complaint.getStatus());
-            ps.setDate(6, complaint.getDateFiled());
-            ps.setString(7, complaint.getAdminReply());
-            
-            int affectedRows = ps.executeUpdate();
-            if (affectedRows == 0) {
-                throw new SQLException("Adding complaint failed, no rows affected.");
-            }
-            try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
-                if (generatedKeys.next()) {
-                    complaint.setComplaintId(generatedKeys.getInt(1));
-                }
-            }
-            return affectedRows;
-        }
-    }
 
-    // Update a complaint with admin reply and change its status to "Replied"
-    public int updateComplaintReply(int complaintId, String adminReply) throws SQLException {
-        String sql = "UPDATE Complaints SET admin_reply = ?, status = 'Replied' WHERE complaint_id = ?";
-        try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setString(1, adminReply);
-            ps.setInt(2, complaintId);
-            return ps.executeUpdate();
-        }
-    }
 }

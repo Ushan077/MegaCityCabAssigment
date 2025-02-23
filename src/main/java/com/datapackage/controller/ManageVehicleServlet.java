@@ -37,6 +37,7 @@ public class ManageVehicleServlet extends HttpServlet {
                 rowsAffected = vehicleDao.createVehicle(vehicle);
             } else if ("updateVehicle".equals(action)) {
                 Vehicle vehicle = new Vehicle();
+                vehicle.setId(Integer.parseInt(request.getParameter("id")));
                 vehicle.setVehicleNo(request.getParameter("vehicle_no"));
                 vehicle.setVehicleName(request.getParameter("vehicle_name"));
                 vehicle.setPrice(Double.parseDouble(request.getParameter("price")));

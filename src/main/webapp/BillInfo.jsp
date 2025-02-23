@@ -150,7 +150,7 @@
       <div class="sidebar-heading text-center mt-3">Menu</div>
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+          <a class="nav-link" href="CustomerHome.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="cusbooking.jsp"><i class="fas fa-calendar-alt"></i> Manage Bookings</a>
