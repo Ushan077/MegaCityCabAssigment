@@ -210,7 +210,7 @@
     
     // loadBookings: Fetch booking details and build the table with a Select button
     function loadBookings() {
-      fetch("FetchBookingsServlet")
+      fetch("EmployeeFetchBookingsServlet")
         .then(response => response.json())
         .then(bookings => {
           console.log("Fetched bookings:", bookings);

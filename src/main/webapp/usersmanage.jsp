@@ -13,6 +13,9 @@
     // Update this URL based on your deployment context.
     const servletUrl = '/MegaCityCabAssignment/AdminServlet';
 
+    // Global variable to store users data.
+    let usersData = [];
+
     // Display a success message.
     function showSuccess(message) {
       const alertDiv = document.getElementById('alertMessage');
@@ -31,6 +34,37 @@
       setTimeout(() => { alertDiv.style.display = 'none'; }, 5000);
     }
 
+    // Render users based on the selected filter.
+    function renderUsers() {
+      const filterValue = document.getElementById("filterUserType").value;
+      const tableBody = document.getElementById('usersTableBody');
+      if (!Array.isArray(usersData)) return;
+      let filteredUsers = usersData;
+      if (filterValue !== "all") {
+        filteredUsers = usersData.filter(user => user.usertype.toLowerCase() === filterValue);
+      }
+      if (filteredUsers.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="6" class="text-center">No users found</td></tr>`;
+      } else {
+        let html = "";
+        filteredUsers.forEach(user => {
+          html += `
+                <tr>
+                  <td>${user.nic || "N/A"}</td>
+                  <td>${user.name || "N/A"}</td>
+                  <td>${user.address || "N/A"}</td>
+                  <td>${user.contact || "N/A"}</td>
+                  <td>${user.usertype || "N/A"}</td>
+                  <td>
+                    <button class="btn btn-warning btn-sm" onclick="editUser('${user.nic}', '${user.name}', '${user.address}', '${user.contact}', '${user.usertype}')">Edit</button>
+                    <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.nic}')">Delete</button>
+                  </td>
+                </tr>`;
+        });
+        tableBody.innerHTML = html;
+      }
+    }
+
     // Load users from the servlet and populate the table.
     function loadUsers() {
       fetch(servletUrl)
@@ -43,33 +77,18 @@
         .then(data => {
           console.log("Users data received:", data);
           const users = Array.isArray(data) ? data : [data];
-          const tableBody = document.getElementById('usersTableBody');
-          if (users.length === 0) {
-            tableBody.innerHTML = `<tr><td colspan="6" class="text-center">No users found</td></tr>`;
-          } else {
-            let html = "";
-            users.forEach(user => {
-              console.log('NIC:', user.nic, 'Name:', user.name);
-              html += `
-                <tr>
-                  <td>${user.nic || "N/A"}</td>
-                  <td>${user.name || "N/A"}</td>
-                  <td>${user.address || "N/A"}</td>
-                  <td>${user.contact || "N/A"}</td>
-                  <td>${user.usertype || "N/A"}</td>
-                  <td>
-                    <button class="btn btn-warning btn-sm" onclick="editUser('${user.nic}', '${user.name}', '${user.address}', '${user.contact}', '${user.usertype}')">Edit</button>
-                    <button class="btn btn-danger btn-sm" onclick="deleteUser('${user.nic}')">Delete</button>
-                  </td>
-                </tr>`;
-            });
-            tableBody.innerHTML = html;
-          }
+          usersData = users;
+          renderUsers();
         })
         .catch(error => {
           console.error("Error loading users:", error);
           showError("Error loading users: " + error.message);
         });
+    }
+
+    // Filter handler for user type dropdown.
+    function applyUserFilter() {
+      renderUsers();
     }
 
     // Add a new user.
@@ -238,6 +257,17 @@
             </form>
           </div>
           
+
+          <div class="mb-3">
+            <label for="filterUserType" class="form-label"><strong>Filter by User Type:</strong></label>
+            <select id="filterUserType" class="form-select w-auto" onchange="applyUserFilter()">
+              <option value="all">All</option>
+              <option value="admin">Admin</option>
+              <option value="user">User</option>
+              <option value="employee">Employee</option>
+            </select>
+          </div>
+          
           <!-- Users Table -->
           <div>
             <h4>Users List</h4>
@@ -261,7 +291,10 @@
       </div>
     </div>
   </div>
-  
+   <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
+    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

@@ -1,37 +1,76 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="true" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="true" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Admin Reply</title>
-  <!-- Bootstrap CSS (v4.5.2) -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Bootstrap CSS (v5.3.0) -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
-  <!-- Custom Navbar CSS -->
-  <link rel="stylesheet" href="cusnav.css">
+  <!-- Custom CSS with theme variables -->
   <style>
+    :root {
+      --bg-color: #f4f6f9;
+      --text-color: #333;
+      --navbar-bg: #007bff;
+      --card-bg: #ffffff;
+      --border-color: #dee2e6;
+      --primary-color: #0d6efd;
+    }
+    
+    .night-mode {
+      --bg-color: #121212;
+      --text-color: #ffffff;
+      --navbar-bg: #1f78d1;
+      --card-bg: #1e1e1e;
+      --border-color: #3e3e3e;
+    }
+    
     body {
-      background-color: #f8f9fa;
+      font-family: 'Poppins', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
       padding: 2rem;
     }
-    .container {
+    
+    .container-custom {
       max-width: 800px;
       margin: auto;
-      background: #fff;
+      background: var(--card-bg);
       padding: 2rem;
       border-radius: 8px;
       box-shadow: 0px 2px 10px rgba(0,0,0,0.1);
     }
+    
     .icon {
       margin-right: 0.5rem;
-      color: #0d6efd;
+      color: var(--primary-color);
+    }
+    
+    footer {
+      background-color: #343a40;
+      color: #fff;
+      padding: 10px 0;
+      margin-top: 20px;
+    }
+    
+    footer hr {
+      border-top: 1px solid #fff;
+      margin-bottom: 10px;
+    }
+    
+    footer p {
+      margin: 0;
+      text-align: center;
+      font-size: 0.9rem;
     }
   </style>
 </head>
 <body>
-  <div class="container">
+  <div class="container-custom">
     <h2 id="complaintTitle" class="mb-4">
       <i class="fas fa-comment-dots icon"></i>
       Admin Reply for Complaint #
@@ -50,21 +89,23 @@
     <!-- Admin Reply Form -->
     <form id="replyForm">
       <input type="hidden" name="complaint_id" id="complaint_id">
-      <div class="form-group">
-        <label for="admin_reply">
+      <div class="mb-3">
+        <label for="admin_reply" class="form-label">
           <i class="fas fa-reply icon"></i>
           Admin Reply:
         </label>
         <textarea class="form-control" name="admin_reply" id="admin_reply" rows="5" required></textarea>
       </div>
-      <button type="submit" class="btn btn-primary">
-        <i class="fas fa-paper-plane icon"></i>
-        Submit Reply
-      </button>
-      <a href="admin_complaints.jsp" class="btn btn-secondary">
-        <i class="fas fa-arrow-left icon"></i>
-        Back to Complaints
-      </a>
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">
+          <i class="fas fa-paper-plane icon"></i>
+          Submit Reply
+        </button>
+        <a href="admin_complaints.jsp" class="btn btn-secondary">
+          <i class="fas fa-arrow-left icon"></i>
+          Back to Complaints
+        </a>
+      </div>
     </form>
   </div>
 
@@ -99,7 +140,6 @@
       const complaintId = document.getElementById("complaint_id").value;
       const adminReply = document.getElementById("admin_reply").value;
 
-      // Use backticks for a template literal to preserve the ${...} syntax.
       fetch("AdminReplyServlet", {
         method: "POST",
         headers: {
@@ -126,11 +166,11 @@
     document.addEventListener("DOMContentLoaded", populateComplaintDetails);
   </script>
   
-  <!-- Bootstrap JS Bundle -->
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
-  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 10px 0; margin-top: 20px;">
-    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
+  <!-- Bootstrap JS Bundle (v5.3.0) -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <footer>
+    <hr>
+    <p>&copy; 2023 MegaCityCab. All rights reserved.</p>
   </footer>
 </body>
 </html>

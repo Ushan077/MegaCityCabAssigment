@@ -292,7 +292,7 @@
 
     // Fetch booking data from the server and populate the table.
     function loadBookings() {
-  fetch("FetchBookingsServlet")
+  fetch("EmployeeFetchBookingsServlet")
     .then(response => response.json())
     .then(bookings => {
       console.log("Fetched bookings:", bookings); // Debug log

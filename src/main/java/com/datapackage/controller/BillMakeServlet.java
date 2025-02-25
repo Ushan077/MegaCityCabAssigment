@@ -60,7 +60,7 @@ public class BillMakeServlet extends HttpServlet {
             
             int insertRow = insertPs.executeUpdate();
             
-            // If insertion is successful, delete the booking from carbooking table
+           
             if (insertRow > 0) {
                 deletePs = con.prepareStatement(deleteSql);
                 deletePs.setInt(1, Integer.parseInt(bookingID));

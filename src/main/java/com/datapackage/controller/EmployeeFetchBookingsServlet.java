@@ -14,8 +14,8 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.List;
 
-@WebServlet("/FetchBookingsServlet")
-public class FetchBookingsServlet extends HttpServlet {
+@WebServlet("/EmployeeFetchBookingsServlet")
+public class EmployeeFetchBookingsServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
     private final BookingDao bookingDao = new BookingDao();
 
@@ -26,17 +26,9 @@ public class FetchBookingsServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         JSONArray jsonArray = new JSONArray();
 
-        // Retrieve the logged-in customer's ID from the request.
-        String customerIdParam = request.getParameter("customerId");
-        if (customerIdParam == null || customerIdParam.trim().isEmpty()) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing customerId parameter.");
-            return;
-        }
-        int customerId = Integer.parseInt(customerIdParam);
-
         try {
-            // Call a DAO method that retrieves bookings only for the given customer.
-            List<Booking> bookings = bookingDao.getBookingsByCustomer(customerId);
+            // Retrieve all bookings (for employee view).
+            List<Booking> bookings = bookingDao.getBookings();
             for (Booking b : bookings) {
                 JSONObject bookingJson = new JSONObject();
                 bookingJson.put("bookingId", b.getBookingId());
@@ -51,10 +43,7 @@ public class FetchBookingsServlet extends HttpServlet {
             e.printStackTrace();
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Database error.");
             return;
-        } catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        }
 
         try (PrintWriter out = response.getWriter()) {
             out.print(jsonArray.toString());

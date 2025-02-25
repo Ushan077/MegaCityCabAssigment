@@ -79,6 +79,28 @@ public class BookingDao {
         }
     }
 
+    public List<Booking> getBookingsByCustomer(int customerId) throws SQLException, ClassNotFoundException {
+        List<Booking> bookings = new ArrayList<>();
+        String sql = "SELECT id, booking_date, customer_id, vehicle, pickup_location, dropoff_location FROM carbooking WHERE customer_id = ?";
+        try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setInt(1, customerId);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Booking booking = new Booking();
+                    booking.setBookingId(rs.getInt("id"));
+                    booking.setBookingDate(rs.getDate("booking_date"));
+                    booking.setCustomerId(rs.getInt("customer_id"));
+                    booking.setVehicle(rs.getString("vehicle"));
+                    booking.setPickupLocation(rs.getString("pickup_location"));
+                    booking.setDropoffLocation(rs.getString("dropoff_location"));
+                    bookings.add(booking);
+                }
+            }
+        }
+        return bookings;
+    }
+
 
 
 }

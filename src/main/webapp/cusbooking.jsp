@@ -17,10 +17,10 @@
     /* Global Styles */
     body {
       font-family: Arial, sans-serif;
-      background-image: url('https://images.unsplash.com/photo-1550445324-11f720eb5fcb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); 
-      background-size: cover; 
-      background-position: center center; 
-      background-repeat: no-repeat; 
+      background-image: url('https://images.unsplash.com/photo-1550445324-11f720eb5fcb?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
       margin: 0;
       padding: 0;
       transition: background-color 0.3s ease, color 0.3s ease;
@@ -154,7 +154,7 @@
             </tr>
           </thead>
           <tbody id="bookingTableBody">
-            <!-- Booking rows will be loaded here via FetchBookingsServlet -->
+           
           </tbody>
         </table>
       </div>
@@ -162,14 +162,12 @@
   </div>
 
   <script>
-    // Load Vehicles from the server
+    
     function loadVehicles() {
       const url = window.location.origin + '/MegaCityCabAssignment/FetchVehiclesServlet';
       fetch(url)
         .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
+          if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
           return response.json();
         })
         .then(data => {
@@ -178,7 +176,7 @@
           data.forEach(vehicle => {
             const option = document.createElement("option");
             option.value = vehicle.id;
-            option.textContent = `${vehicle.vehicleName} (${vehicle.vehicleNo}) - $${vehicle.price}`;
+            option.textContent = `${vehicle.vehicleName} (${vehicle.vehicleNo}) - Rs: ${vehicle.price}`;
             vehicleSelect.appendChild(option);
           });
         })
@@ -188,7 +186,7 @@
         });
     }
 
-    // Read cookie value by name
+    
     function getCookie(name) {
       const cookieArr = document.cookie.split(";");
       for (let cookie of cookieArr) {
@@ -200,7 +198,7 @@
       return "";
     }
     
-    // Load user data into form fields
+   
     function loadUserData() {
       const userName = getCookie("name") || "Guest";
       const userID   = getCookie("userID") || "N/A";
@@ -208,14 +206,20 @@
       document.getElementById("customerID").value = userID;
     }
     
-    // Fetch and display bookings
+  
     function loadBookings() {
-      const url = window.location.origin + '/MegaCityCabAssignment/FetchBookingsServlet';
+      const customerId = getCookie("userID");
+      if (!customerId) {
+        alert("User not logged in.");
+        return;
+      }
+      
+     
+      const url = window.location.origin + '/MegaCityCabAssignment/FetchBookingsServlet?customerId=' + customerId;
+      
       fetch(url)
         .then(response => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-          }
+          if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
           return response.json();
         })
         .then(data => {
@@ -227,7 +231,9 @@
                   <td>\${booking.dropoffLocation}</td>
                   <td>\${booking.vehicle}</td>
                   <td>\${booking.bookingDate}</td>
-                  <td><button class="btn btn-danger btn-sm" onclick="deleteBooking(${booking.bookingId})">Delete</button></td>
+                  <td>
+                    <button class="btn btn-danger btn-sm" onclick="deleteBooking(${booking.bookingId})">Delete</button>
+                  </td>
                 </tr>`).join('')
             : "<tr><td colspan='6'>No bookings available.</td></tr>";
           document.getElementById("bookingTableBody").innerHTML = html;
@@ -240,7 +246,6 @@
     }
 
     function deleteBooking(bookingId) {
-        // Convert to integer for consistency
         bookingId = parseInt(bookingId);
         console.log("Deleting Booking ID:", bookingId);
 
@@ -270,9 +275,9 @@
             console.error("Delete booking error:", error);
             alert("Failed to delete booking. Check console for details.");
         });
-      }
+    }
 
-    // Initialize the page once
+    // Initialize the page.
     function initializePage() {
       loadUserData();
       loadVehicles();

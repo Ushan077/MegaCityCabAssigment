@@ -35,18 +35,17 @@ public class ComplaintDao {
                     complaint.setDescription(rs.getString("description"));
                     complaint.setAdminReply(rs.getString("admin_reply"));
                     complaint.setStatus(rs.getString("status"));
-                    complaint.setDateFiled(rs.getDate("date_filed")); // Using getDate for java.sql.Date
+                    complaint.setDateFiled(rs.getDate("date_filed"));
                     complaints.add(complaint);
                 }
             }
         }
         return complaints;
     }
- // In ComplaintDao.java
 
     public List<Complaint> getComplaints() throws SQLException {
         List<Complaint> complaints = new ArrayList<>();
-        String sql = "SELECT * FROM Complaints"; // Removed WHERE clause to display all records
+        String sql = "SELECT * FROM Complaints";
         try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
              PreparedStatement ps = con.prepareStatement(sql);
              ResultSet rs = ps.executeQuery()) {
@@ -65,6 +64,17 @@ public class ComplaintDao {
         }
         return complaints;
     }
-
-
+    
+    // Update the admin reply and status for a complaint
+    public int updateComplaintReply(int complaintId, String adminReply) throws SQLException {
+        String sql = "UPDATE Complaints SET admin_reply = ?, status = ? WHERE complaint_id = ?";
+        try (Connection con = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+             PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, adminReply);
+            // Update status to "Replied" (or change as necessary)
+            ps.setString(2, "Replied");
+            ps.setInt(3, complaintId);
+            return ps.executeUpdate();
+        }
+    }
 }

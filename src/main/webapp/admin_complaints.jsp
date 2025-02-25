@@ -45,6 +45,17 @@
       </div>
       <div class="col-md-10 content">
         <h2><i class="fas fa-exclamation-triangle"></i> Complaints List</h2>
+        
+        <!-- Filter dropdown -->
+        <div class="mb-3">
+          <label for="filterStatus" class="mr-2"><strong>Filter by Status:</strong></label>
+          <select id="filterStatus" class="custom-select w-auto" onchange="applyFilter()">
+            <option value="all">All</option>
+            <option value="Pending">Pending</option>
+            <!-- You can add more options here if needed -->
+          </select>
+        </div>
+        
         <div class="table-responsive">
           <table class="table table-striped table-bordered">
             <thead class="thead-dark">
@@ -66,17 +77,20 @@
     </div>
   </div>
   <script>
-    // Load complaints via a fetch call to your GetComplaintsServlet
-    function loadComplaints() {
-      fetch("GetComplaintsServlet")
-        .then(response => response.json())
-        .then(data => {
-          const tbody = document.querySelector("#complaintsTable");
-          tbody.innerHTML = "";
-          data.forEach(complaint => {
-            // Use a template literal (backticks) so that the complaint ID is inserted into the URL
-            const tr = document.createElement("tr");
-            tr.innerHTML = `
+    let complaintsData = [];
+
+    // Render complaints based on current filter
+    function renderComplaints() {
+      const filterValue = document.getElementById("filterStatus").value;
+      const tbody = document.querySelector("#complaintsTable");
+      tbody.innerHTML = "";
+      let filteredData = complaintsData;
+      if (filterValue !== "all") {
+        filteredData = complaintsData.filter(complaint => complaint.status === filterValue);
+      }
+      filteredData.forEach(complaint => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
               <td>${complaint.complaintId}</td>
               <td>${complaint.userId}</td>
               <td>${complaint.userName}</td>
@@ -90,12 +104,27 @@
                 </a>
               </td>
             `;
-            tbody.appendChild(tr);
-          });
-          document.getElementById("rowCount").textContent = "Total Complaints: " + data.length;
+        tbody.appendChild(tr);
+      });
+      document.getElementById("rowCount").textContent = "Total Complaints: " + filteredData.length;
+    }
+
+    // Load complaints via a fetch call to your GetComplaintsServlet
+    function loadComplaints() {
+      fetch("GetComplaintsServlet")
+        .then(response => response.json())
+        .then(data => {
+          complaintsData = data;
+          renderComplaints();
         })
         .catch(error => console.error("Error loading complaints:", error));
     }
+    
+    // Apply filter when dropdown changes
+    function applyFilter() {
+      renderComplaints();
+    }
+    
     document.addEventListener("DOMContentLoaded", loadComplaints);
 
     // Simple theme toggle function
