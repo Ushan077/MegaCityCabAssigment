@@ -190,8 +190,16 @@
     </div>
   </div>
   
-  <!-- Scripts -->
-  <!-- Include jQuery before Bootstrap JS (Bootstrap 4 dependency) -->
+  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px 0; margin-top: 20px;">
+  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+  <p style="margin: 0; text-align: center; font-size: 0.9rem;">
+    &copy; 2023 MegaCityCab. All rights reserved.
+  </p>
+  <p style="margin: 5px 0; text-align: center; font-size: 0.9rem;">
+    Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321
+  </p>
+</footer>
+
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <!-- Bootstrap JS Bundle -->
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>

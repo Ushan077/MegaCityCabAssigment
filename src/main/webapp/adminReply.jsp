@@ -168,9 +168,15 @@
   
   <!-- Bootstrap JS Bundle (v5.3.0) -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <footer>
-    <hr>
-    <p>&copy; 2023 MegaCityCab. All rights reserved.</p>
-  </footer>
+ <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px 0; margin-top: 20px;">
+  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+  <p style="margin: 0; text-align: center; font-size: 0.9rem;">
+    &copy; 2023 MegaCityCab. All rights reserved.
+  </p>
+  <p style="margin: 5px 0; text-align: center; font-size: 0.9rem;">
+    Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321
+  </p>
+</footer>
+
 </body>
 </html>
