@@ -1,164 +1,453 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Customer Home - Mega City Cab</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <title>Mega City Cab - Home</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="cusnav.css">
+  
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-image: url('https://images.unsplash.com/photo-1501746655892-baf3ac230061?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA==');
-      background-size: cover;
-      background-position: center;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    #sidebar {
-      min-width: 200px;
-      max-width: 250px;
-      background-color: #343a40;
-      min-height: 100vh;
-    }
-    #sidebar .nav-link {
-      color: #fff;
-    }
-    #sidebar .nav-link:hover {
-      background-color: #495057;
-    }
-    #sidebar .sidebar-heading {
-      color: #fff;
-      padding: 1rem;
-      font-size: 1.2rem;
-      text-align: center;
-    }
-    .content {
-      flex: 1;
-      padding: 2rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    .background-box {
-      background-color: rgba(255, 255, 255, 0.8);
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-bottom: 20px;
-    }
-    .help-box {
-      background: #fff;
-      padding: 15px;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      margin-top: 2rem;
-      transition: background-color 0.3s ease, color 0.3s ease;
-    }
-    #themeSelector {
-      margin-left: 1rem;
-      padding: 0.2rem;
-      border-radius: 0.2rem;
-    }
-    .dark-mode {
-      background-color: #343a40 !important;
-      color: #f8f9fa !important;
-    }
-    .dark-mode #sidebar {
-      background-color: #495057 !important;
-    }
-    .dark-mode .content,
-    .dark-mode .help-box {
-      background-color: #3a3a3a !important;
-      color: #f8f9fa !important;
-    }
-    .night-mode {
-      background-color: #121212 !important;
-      color: #e0e0e0 !important;
-    }
-    .night-mode #sidebar {
-      background-color: #1c1c1c !important;
-    }
-    .night-mode .content,
-    .night-mode .help-box {
-      background-color: #1f1f1f !important;
-      color: #e0e0e0 !important;
-    }
+  font-family: 'Roboto', sans-serif;
+  background-image: url('https://media.istockphoto.com/id/936346770/de/vektor/travel-concept-musterdesign-abstrakte-flugzeug-routen-reisen-und-tourismus-nahtlose.jpg?s=1024x1024&w=is&k=20&c=EAeALvegAwD19pV1hDCng92LJc8a2BN0BlOQ1-Pep-c=');
+  background-size: cover;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Top Navbar with gradient */
+.navbar {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d) !important;
+  padding: 10px 20px;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: #fff !important;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.navbar-nav .nav-link {
+  color: #fff !important;
+  margin-right: 1.5rem;
+  font-weight: 500;
+  position: relative;
+  padding: 8px 0;
+}
+
+.navbar-nav .nav-link::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background: #fff;
+  left: 0;
+  bottom: 0;
+  transition: width 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover::after {
+  width: 100%;
+}
+
+/* Modern Sidebar with hover effects */
+#sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background: linear-gradient(135deg, #343a40 0%, #121212 100%);
+  color: #fff;
+  padding: 2rem 1.5rem;
+  overflow-y: auto;
+  transition: all 0.3s ease;
+  z-index: 1000;
+}
+
+#sidebar .sidebar-heading {
+  text-align: center;
+  font-size: 1.4rem;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+#sidebar .nav-link {
+  color: rgba(255,255,255,0.8);
+  display: block;
+  padding: 0.8rem 1rem;
+  border-radius: 8px;
+  margin-bottom: 0.8rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+#sidebar .nav-link:hover,
+#sidebar .nav-link.active {
+  background-color: rgba(255,255,255,0.15);
+  color: #fff;
+  padding-left: 1.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#sidebar .nav-link i {
+  margin-right: 10px;
+}
+
+/* Main Content Area with improved spacing */
+.content {
+  margin-left: 250px;
+  margin-top: 70px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  min-height: calc(100vh - 70px);
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+/* Enhanced Hero Section with animation */
+.hero {
+  position: relative;
+  background-image: url('https://cdn.pixabay.com/photo/2017/06/14/08/20/map-of-the-world-2401458_1280.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 3rem;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,123,255,0.5) 100%);
+  z-index: 1;
+}
+
+.hero h1 {
+  position: relative;
+  z-index: 2;
+  font-size: 4rem;
+  font-weight: 800;
+  text-align: center;
+  color: #fff;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.7);
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modern Welcome Box */
+.welcome-box {
+  background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(240,240,240,0.95));
+  border-radius: 15px;
+  padding: 40px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  margin-bottom: 2.5rem;
+  border-left: 5px solid #007bff;
+}
+
+/* Enhanced Gallery Section - Customer Reviews */
+.customer-review {
+  margin-top: 3rem;
+}
+
+.customer-review h3 {
+  text-align: center;
+  color: #007bff;
+  margin-bottom: 2rem;
+  font-size: 2.2rem;
+  font-weight: 700;
+  position: relative;
+  padding-bottom: 15px;
+}
+
+.customer-review h3:after {
+  content: '';
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.customer-review .card {
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  border: none;
+  overflow: hidden;
+}
+
+.customer-review .card:hover {
+  transform: translateY(-15px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+}
+
+.customer-review .card-header {
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  color: white;
+  font-weight: 600;
+  padding: 15px;
+}
+
+.customer-review .card-body {
+  padding: 25px;
+}
+
+/* Modern Footer */
+footer {
+  background: linear-gradient(to right, #1a2a6c, #b21f1f, #fdbb2d);
+  color: #fff;
+  padding: 30px 0;
+  margin-top: 3rem;
+}
+
+footer p {
+  margin: 0;
+  text-align: center;
+  font-size: 1rem;
+  letter-spacing: 1px;
+}
+
+footer .social-icons {
+  margin-top: 15px;
+  text-align: center;
+}
+
+footer .social-icons a {
+  color: white;
+  font-size: 1.5rem;
+  margin: 0 10px;
+  transition: all 0.3s ease;
+}
+
+footer .social-icons a:hover {
+  color: rgba(255,255,255,0.7);
+  transform: translateY(-5px);
+}
+
+/* Responsive adjustments with smoother transitions */
+@media (max-width: 992px) {
+  #sidebar {
+    width: 200px;
+  }
+  
+  .content {
+    margin-left: 200px;
+  }
+  
+  .hero h1 {
+    font-size: 3rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  #sidebar {
+    width: 100%;
+    height: auto;
+    position: relative;
+    padding: 1rem;
+  }
+  
+  .content {
+    margin-left: 0;
+    margin-top: 0;
+  }
+  
+  .welcome-box {
+    padding: 25px;
+  }
+  
+  .customer-review .card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+/* Button styling */
+.btn-primary {
+  background: linear-gradient(to right, #007bff, #00c6ff);
+  border: none;
+  padding: 10px 25px;
+  border-radius: 50px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,123,255,0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(0,123,255,0.5);
+}
+
+/* Card hover effects */
+.destination-card {
+  position: relative;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  transition: all 0.4s ease;
+  margin-bottom: 30px;
+}
+
+.destination-card img {
+  transition: transform 0.8s ease;
+}
+
+.destination-card:hover img {
+  transform: scale(1.1);
+}
+
+.destination-card .card-body {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  color: white;
+  padding: 20px;
+}
   </style>
 </head>
 <body>
-  <nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><i class="fas fa-user-circle"></i> Customer Dashboard</a>
-    <div class="d-flex">
-      <a class="btn btn-outline-light mr-2" href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+  <!-- Navigation Bar -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><i class="fas fa-taxi"></i> Mega City Cab</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
+              data-bs-target="#navbarNav" aria-controls="navbarNav" 
+              aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="ms-auto">
+          <a class="btn btn-outline-light mr-2" href="LogoutServlet"><i class="fas fa-sign-out-alt"></i> Logout</a>
+        </div>
+      </div>
     </div>
   </nav>
+  
+  <!-- Sidebar & Main Content Layout -->
   <div class="d-flex">
+    <!-- Sidebar -->
     <div id="sidebar">
-      <div class="sidebar-heading text-center mt-3">Menu</div>
+      <div class="sidebar-heading">Menu</div>
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="CustomerHome.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" href="cusbooking.jsp"><i class="fas fa-calendar-alt"></i> Manage Bookings</a></li>
         <li class="nav-item"><a class="nav-link" href="BillInfo.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a></li>
         <li class="nav-item"><a class="nav-link" href="CusComplaint.jsp"><i class="fas fa-exclamation-circle"></i> Complaint</a></li>
-        <li class="nav-item"><a class="nav-link" href="aboutus.jsp"><i class="fas fa-info-circle"></i> About US</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutus.jsp"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="helpandsupport.jsp"><i class="fas fa-exclamation-circle"></i> Help & Support</a></li>
         <li class="nav-item"><a class="nav-link" href="LogoutServlet"><i class="fas fa-door-open"></i> Exit</a></li>
-        
       </ul>
     </div>
+    
+    <!-- Main Content -->
     <div class="content">
-      <div class="background-box">
-        <h2 class="text-primary">Welcome, <span id="usernameDisplay"></span>!</h2>
+      <!-- Hero Section with Welcome Message Background Photo -->
+      <section class="hero">
+        <h1>Welcome to Mega City Cab Service</h1>
+      </section>
+      
+      <!-- Welcome Box -->
+      <div class="welcome-box">
+        <h2 class="text-primary">Hello, <span id="usernameDisplay"></span>!</h2>
         <hr>
         <div class="mb-3">
           <strong>User ID:</strong> <span id="userIDDisplay">N/A</span>
         </div>
+        <p>Experience the best cab service in the city. Book your ride, manage your bookings, view your bill details, and get prompt support all in one place.</p>
       </div>
-      <div class="help-box">
-        <h4 class="text-success">User Help Manual</h4>
-        <p class="text-muted"><strong>User Guide: Booking Management</strong></p>
-        <p class="font-weight-bold text-primary">1. Create a New Booking</p>
-        <p class="ml-3"><strong>Step 1:</strong> <span class="text-success">Auto-Generated Booking ID and Name</span></p>
-        <p class="ml-4">A unique Booking ID is automatically generated for tracking. Enter your Name when prompted.</p>
-        <p class="ml-3"><strong>Step 2:</strong> <span class="text-success">Enter Pickup Location</span></p>
-        <p class="ml-4">Provide your Pickup Location where the vehicle will collect you.</p>
-        <p class="ml-3"><strong>Step 3:</strong> <span class="text-success">Enter Drop-off Location</span></p>
-        <p class="ml-4">Enter your destination in the Drop-off field.</p>
-        <p class="ml-3"><strong>Step 4:</strong> <span class="text-success">Select Date</span></p>
-        <p class="ml-4">Choose a date for your booking from the calendar.</p>
-        <p class="ml-3"><strong>Step 5:</strong> <span class="text-success">Select Vehicle</span></p>
-        <p class="ml-4">Pick the vehicle that suits your needs from the available options.</p>
-        <p class="ml-3"><strong>Step 6:</strong> <span class="text-success">Confirm Booking</span></p>
-        <p class="ml-4">Click "Book Now" to finalize your booking details.</p>
-        <p class="font-weight-bold text-primary">2. View Bill Information</p>
-        <p class="ml-3">Access detailed billing information after your booking is complete.</p>
-        <ul class="ml-4">
-          <li>Navigate to the booking summary page.</li>
-          <li>Click on "Bill Information".</li>
-          <li>Review the charges and breakdown.</li>
-        </ul>
-        <p class="font-weight-bold text-primary">3. Submit a Complaint</p>
-        <p class="ml-3">If you face any issues, file a complaint by:</p>
-        <ul class="ml-4">
-          <li>Entering a Subject for the complaint.</li>
-          <li>Providing detailed Description of the issue.</li>
-          <li>Clicking "Submit Complaint" to notify support.</li>
-        </ul>
-        <p class="font-weight-bold text-primary">4. View Responses to Complaints</p>
-        <p class="ml-3">Check the Responses area to see replies from support regarding your complaints.</p>
-        <ul class="ml-4">
-          <li>Locate the Complaint Section on your booking summary page.</li>
-          <li>Review the admin responses.</li>
-          <li>Follow up if further information is required.</li>
-        </ul>
-      </div>
+      
+      <!-- Gallery Section: Customer Reviews -->
+      <section class="customer-review">
+        <h3 class="text-center mb-4">Customer Reviews</h3>
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Linuka Ransith</h5>
+                <h6 class="card-subtitle mb-2 text-muted">⭐⭐⭐⭐⭐</h6>
+                <p class="card-text">Great service! The ride was smooth and the driver was very friendly. Highly recommended!</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Emil Oshadha</h5>
+                <h6 class="card-subtitle mb-2 text-muted">⭐⭐⭐⭐</h6>
+                <p class="card-text">Good experience overall, though the car could have been a bit cleaner. Timely pick-up and courteous service.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Thinura Chandrasekara</h5>
+                <h6 class="card-subtitle mb-2 text-muted">⭐⭐⭐⭐⭐</h6>
+                <p class="card-text">Excellent experience! I will definitely book with Mega City Cab again for my future rides.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px 0; margin-top: 20px;">
-    <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-    <p style="margin: 0; text-align: center; font-size: 0.9rem;">&copy; 2023 MegaCityCab. All rights reserved.</p>
-    <p style="margin: 5px 0; text-align: center; font-size: 0.9rem;">Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321</p>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
+      <p>&copy; 2023 MegaCityCab. All rights reserved.</p>
+      <p>Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321</p>
+    </div>
   </footer>
+  
+  <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
   <script>
@@ -172,8 +461,6 @@
       }
       return "";
     }
-  </script>
-  <script>
     document.addEventListener("DOMContentLoaded", function () {
       document.getElementById("userIDDisplay").textContent = getCookie("userID") || "N/A";
       document.getElementById("usernameDisplay").textContent = getCookie("name") || "Guest";

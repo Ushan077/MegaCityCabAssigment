@@ -67,7 +67,7 @@ public class FetchBillsJsonServlet extends HttpServlet {
                 bill.setKilometers(rs.getDouble("kilometers"));
                 bill.setPerKmRate(rs.getDouble("per_km_rate"));
                 bill.setAmount(rs.getDouble("amount"));
-                bill.setBillDate(rs.getDate("bill_date")); // Adjust format if necessary
+                bill.setBillDate(rs.getDate("bill_date")); 
 
                 bills.add(bill);
             }

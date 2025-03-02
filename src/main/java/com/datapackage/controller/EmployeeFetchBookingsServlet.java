@@ -34,7 +34,8 @@ public class EmployeeFetchBookingsServlet extends HttpServlet {
                 bookingJson.put("bookingId", b.getBookingId());
                 bookingJson.put("bookingDate", b.getBookingDate().toString());
                 bookingJson.put("customerId", b.getCustomerId());
-                bookingJson.put("vehicle", b.getVehicle());
+                bookingJson.put("vehicle", b.getVehicle());     
+                bookingJson.put("vehicleId", b.getVehicleId());
                 bookingJson.put("pickupLocation", b.getPickupLocation());
                 bookingJson.put("dropoffLocation", b.getDropoffLocation());
                 jsonArray.put(bookingJson);

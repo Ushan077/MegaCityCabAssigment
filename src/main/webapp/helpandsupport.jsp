@@ -2,14 +2,18 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>About Us - Mega City Cab</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" />
-  <link rel="stylesheet" href="cusnav.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>User Help Manual - Booking Management</title>
+  
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+  
   <style>
-    body {
+     body {
       font-family: 'Roboto', Arial, sans-serif;
       background-image: url('https://media.istockphoto.com/id/936346770/de/vektor/travel-concept-musterdesign-abstrakte-flugzeug-routen-reisen-und-tourismus-nahtlose.jpg?s=1024x1024&w=is&k=20&c=EAeALvegAwD19pV1hDCng92LJc8a2BN0BlOQ1-Pep-c=');
       background-size: cover;
@@ -288,7 +292,7 @@
 </head>
 <body>
   <!-- Top Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">Mega City Cab</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
@@ -305,113 +309,83 @@
       </div>
     </div>
   </nav>
-
-  <!-- Sidebar + Main Content Layout -->
+  
+  <!-- Sidebar and Main Content Layout -->
   <div class="d-flex">
     <!-- Sidebar -->
     <div id="sidebar">
       <div class="sidebar-heading">Menu</div>
       <ul class="nav flex-column">
-        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+        <li class="nav-item"><a class="nav-link" href="CustomerHome.html"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
         <li class="nav-item"><a class="nav-link" href="cusbooking.jsp"><i class="fas fa-calendar-alt"></i> Manage Bookings</a></li>
         <li class="nav-item"><a class="nav-link" href="BillInfo.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Information</a></li>
         <li class="nav-item"><a class="nav-link" href="CusComplaint.jsp"><i class="fas fa-exclamation-circle"></i> Complaint</a></li>
-        <li class="nav-item"><a class="nav-link active" href="aboutus.jsp"><i class="fas fa-info-circle"></i> About Us</a></li>
-        <li class="nav-item"><a class="nav-link" href="helpandsupport.jsp"><i class="fas fa-question-circle"></i> Help & Support</a></li>
+        <li class="nav-item"><a class="nav-link" href="aboutus.jsp"><i class="fas fa-info-circle"></i> About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="helpandsupport.jsp"><i class="fas fa-exclamation-circle"></i> Help & Support</a></li>
         <li class="nav-item"><a class="nav-link" href="LogoutServlet"><i class="fas fa-door-open"></i> Exit</a></li>
       </ul>
     </div>
     
     <!-- Main Content -->
     <div class="content">
-      <div class="container">
-        <div class="row align-items-center">
-          <div class="col-md-6 about-section">
-            <h2>About Us</h2>
-            <p>
-              Mega City Cab is a leading transportation service dedicated to providing safe, reliable, and affordable taxi services throughout the city. Founded with a commitment to excellence, we have grown to become one of the most trusted names in urban mobility.
-            </p>
-            <p>
-              Our mission is to connect people with their destinations in a timely, efficient, and secure manner. With a modern fleet of vehicles and a team of experienced drivers, we strive to offer a superior travel experience for every customer.
-            </p>
-            <p>
-              At Mega City Cab, customer satisfaction is our top priority. We continuously innovate and invest in technology to ensure a seamless and convenient ride experience—from easy booking through our online platform to professional, courteous service on every trip.
-            </p>
-            <p>
-              We believe in building lasting relationships with our customers by consistently delivering quality service. Whether you need a ride to work, a quick trip across town, or transportation to and from the airport, Mega City Cab is here to serve you.
-            </p>
-            <p>
-              For further information, please contact our customer support team at <strong>info@megacitycab.com</strong> or call <strong>+1-555-123-4567</strong>.
-            </p>
-          </div>
-          <div class="col-md-6">
-            <div class="img-container">
-              <img src="https://img.freepik.com/free-vector/app-taxi-service_24908-60897.jpg?t=st=1740470190~exp=1740473790~hmac=c13efe07d61b802a20d8008a5f7bd36a74a262b550447d6f6f831f2a5be6b3e8&w=900" class="img-fluid img-custom" alt="Mega City Cab">
-              <div class="img-overlay">
-                <h4>Reliable Transport Services</h4>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div class="help-box mx-auto">
+        <h4 class="text-success">User Help Manual</h4>
+        <p class="text-muted"><strong>User Guide: Booking Management</strong></p>
         
-        <!-- Features Section -->
-        <div class="features-section">
-          <div class="row">
-            <div class="col-12">
-              <h3 class="text-center mb-4" style="color: #1a2a6c; font-weight: 700;">Why Choose Us</h3>
-            </div>
-            
-            <div class="col-md-4">
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-taxi"></i>
-                </div>
-                <h4 class="feature-title">Modern Fleet</h4>
-                <p>Our vehicles are regularly maintained and equipped with modern amenities for your comfort.</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4">
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-user-tie"></i>
-                </div>
-                <h4 class="feature-title">Professional Drivers</h4>
-                <p>Our drivers are experienced, licensed professionals who prioritize your safety and comfort.</p>
-              </div>
-            </div>
-            
-            <div class="col-md-4">
-              <div class="feature-card">
-                <div class="feature-icon">
-                  <i class="fas fa-mobile-alt"></i>
-                </div>
-                <h4 class="feature-title">Easy Booking</h4>
-                <p>Book your ride easily through our website or mobile app for a hassle-free experience.</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <p class="fw-bold text-primary">1. Create a New Booking</p>
+        <p class="ml-3"><strong>Step 1:</strong> <span class="text-success">Auto-Generated Booking ID and Name</span></p>
+        <p class="ml-4">A unique Booking ID is automatically generated for tracking. Enter your Name when prompted.</p>
+        
+        <p class="ml-3"><strong>Step 2:</strong> <span class="text-success">Enter Pickup Location</span></p>
+        <p class="ml-4">Provide your Pickup Location where the vehicle will collect you.</p>
+        
+        <p class="ml-3"><strong>Step 3:</strong> <span class="text-success">Enter Drop-off Location</span></p>
+        <p class="ml-4">Enter your destination in the Drop-off field.</p>
+        
+        <p class="ml-3"><strong>Step 4:</strong> <span class="text-success">Select Date</span></p>
+        <p class="ml-4">Choose a date for your booking from the calendar.</p>
+        
+        <p class="ml-3"><strong>Step 5:</strong> <span class="text-success">Select Vehicle</span></p>
+        <p class="ml-4">Pick the vehicle that suits your needs from the available options.</p>
+        
+        <p class="ml-3"><strong>Step 6:</strong> <span class="text-success">Confirm Booking</span></p>
+        <p class="ml-4">Click "Book Now" to finalize your booking details.</p>
+        
+        <p class="fw-bold text-primary">2. View Bill Information</p>
+        <p class="ml-3">Access detailed billing information after your booking is complete.</p>
+        <ul class="ml-4">
+          <li>Navigate to the booking summary page.</li>
+          <li>Click on "Bill Information".</li>
+          <li>Review the charges and breakdown.</li>
+        </ul>
+        
+        <p class="fw-bold text-primary">3. Submit a Complaint</p>
+        <p class="ml-3">If you face any issues, file a complaint by:</p>
+        <ul class="ml-4">
+          <li>Entering a Subject for the complaint.</li>
+          <li>Providing a detailed Description of the issue.</li>
+          <li>Clicking "Submit Complaint" to notify support.</li>
+        </ul>
+        
+        <p class="fw-bold text-primary">4. View Responses to Complaints</p>
+        <p class="ml-3">Check the Responses area to see replies from support regarding your complaints.</p>
+        <ul class="ml-4">
+          <li>Locate the Complaint Section on your booking summary page.</li>
+          <li>Review the admin responses.</li>
+          <li>Follow up if further information is required.</li>
+        </ul>
       </div>
     </div>
   </div>
-
+  
   <!-- Footer -->
   <footer>
-    <div class="container">
-      <hr>
-      <p>&copy; 2023 MegaCityCab. All rights reserved.</p>
-      <p>Email: info@megacitycab.com | Phone: +1-555-123-4567</p>
-      
-      <div class="social-icons">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-      </div>
-    </div>
+    <hr>
+    <p>&copy; 2025 Mega City Cab. All rights reserved.</p>
   </footer>
-  
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Bootstrap JS and Dependencies -->
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
 </html>

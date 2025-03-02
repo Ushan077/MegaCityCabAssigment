@@ -3,88 +3,971 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vehicle Booking Management</title>
+    <title>Admin Dashboard - Mega City Cab</title>
+    
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f5f5;
+            overflow-x: hidden;
+        }
+        
+        .text-yellow {
+            color: #FFC107;
+        }
+        
+        .bg-yellow {
+            background-color: #FFC107;
+        }
+        
+        .btn-yellow {
+            background-color: #FFC107;
+            color: #212529;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+        
+        .btn-yellow:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        /* Sidebar Styles */
+        .admin-wrapper {
+            display: flex;
+            min-height: 100vh;
+        }
+        
+        .sidebar {
+            width: 260px;
+            background-color: #212529;
+            color: white;
+            position: fixed;
+            height: 100vh;
+            overflow-y: auto;
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+        
+        .sidebar-header {
+            padding: 20px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .sidebar-nav {
+            padding: 15px 0;
+        }
+        
+        .nav-item {
+            margin-bottom: 5px;
+        }
+        
+        .nav-link {
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.8);
+            border-radius: 0;
+            transition: all 0.3s;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+        }
+        
+        .nav-link i {
+            margin-right: 10px;
+            min-width: 20px;
+            text-align: center;
+        }
+        
+        .nav-link:hover, .nav-link.active {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #FFC107;
+        }
+        
+        .nav-category {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.5);
+            padding: 15px 20px 5px;
+            font-weight: 600;
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            margin-left: 260px;
+            transition: all 0.3s;
+        }
+        
+        .content-header {
+            padding: 20px 30px;
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .content-wrapper {
+            padding: 30px;
+        }
+        
+        .dashboard-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s;
+        }
+        
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-card {
+            padding: 20px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin-right: 20px;
+            color: white;
+        }
+        
+        .stat-info h4 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .stat-info p {
+            color: #6c757d;
+            margin-bottom: 0;
+        }
+        
+        .stat-progress {
+            margin-top: 15px;
+        }
+        
+        .badge-primary {
+            background-color: #007bff;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .badge-success {
+            background-color: #28a745;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .badge-warning {
+            background-color: #ffc107;
+            color: #212529;
+            font-weight: 500;
+        }
+        
+        .badge-danger {
+            background-color: #dc3545;
+            color: white;
+            font-weight: 500;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 10px;
+        }
+        
+        .data-table th {
+            padding: 15px;
+            color: #6c757d;
+            font-weight: 600;
+            border: none;
+            background-color: #f8f9fa;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            vertical-align: middle;
+            border-top: none;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .data-table tr {
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .data-table tr:hover td {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transform: scale(1.01);
+        }
+        
+        .data-table td:first-child {
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        
+        .data-table td:last-child {
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+        
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .dropdown-menu-right {
+            right: 0;
+            left: auto;
+        }
+        
+        /* Toggle Sidebar Button */
+        #sidebarToggle {
+            background: none;
+            border: none;
+            color: #6c757d;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        #sidebarToggle:hover {
+            color: #212529;
+        }
+        
+        /* Responsive Sidebar */
+        @media (max-width: 992px) {
+            .sidebar {
+                margin-left: -260px;
+            }
+            
+            .sidebar.show {
+                margin-left: 0;
+            }
+            
+            .main-content {
+                margin-left: 0;
+            }
+            
+            .main-content.push {
+                margin-left: 260px;
+            }
+        }
+        
+        /* Chart container */
+        .chart-container {
+            height: 300px;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-4">
-        <h2 class="text-center">Vehicle Booking Management</h2>
-        
-        
-        <div class="row">
-            <div class="col-md-6">
-                <h4>Available Vehicles</h4>
-                <ul class="list-group" id="vehicle-list">
-                    <li class="list-group-item">Car - Sedan <button class="btn btn-primary btn-sm float-end" onclick="bookVehicle('Car - Sedan')">Book</button></li>
-                    <li class="list-group-item">SUV <button class="btn btn-primary btn-sm float-end" onclick="bookVehicle('SUV')">Book</button></li>
-                    <li class="list-group-item">Bike <button class="btn btn-primary btn-sm float-end" onclick="bookVehicle('Bike')">Book</button></li>
-                </ul>
+    <div class="admin-wrapper">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-taxi text-yellow fs-3 me-2"></i>
+                    <h5 class="mb-0">Mega City Cab</h5>
+                </div>
+                <div class="text-muted mt-2 small">Admin Dashboard</div>
             </div>
-            
-            <!-- Booking Form -->
-            <div class="col-md-6">
-                <h4>Book a Vehicle</h4>
-                <form id="booking-form">
-                    <div class="mb-3">
-                        <label for="vehicle" class="form-label">Vehicle</label>
-                        <input type="text" id="vehicle" class="form-control" readonly>
-                    </div>
-                    <div class="mb-3">
-                        <label for="date" class="form-label">Date & Time</label>
-                        <input type="datetime-local" id="date" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-success">Confirm Booking</button>
-                </form>
+            <div class="sidebar-nav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                    </li>
+                    <div class="nav-category">Bookings</div>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-calendar-check"></i> All Bookings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-hourglass-half"></i> Pending Bookings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-route"></i> Active Rides
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-check-circle"></i> Completed Rides
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-times-circle"></i> Cancelled Bookings
+                        </a>
+                    </li>
+                    
+                    <div class="nav-category">Management</div>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-users"></i> Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user-tie"></i> Drivers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-car"></i> Vehicles
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-star"></i> Ratings & Reviews
+                        </a>
+                    </li>
+                    
+                    <div class="nav-category">Finance</div>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-file-invoice-dollar"></i> Billing
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-hand-holding-usd"></i> Payments
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-chart-line"></i> Revenue Reports
+                        </a>
+                    </li>
+                    
+                    <div class="nav-category">System</div>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-user-shield"></i> Staff Accounts
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-cog"></i> Settings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
         
-        
-        <h4 class="mt-4">My Bookings</h4>
-        <table class="table table-bordered" id="booking-table">
-            <thead>
-                <tr>
-                    <th>Vehicle</th>
-                    <th>Date & Time</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody></tbody>
-        </table>
+        <!-- Main Content -->
+        <div class="main-content" id="mainContent">
+            <!-- Content Header -->
+            <div class="content-header">
+                <button id="sidebarToggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="d-flex align-items-center">
+                    <div class="dropdown me-3">
+                        <button class="btn btn-light position-relative" type="button" id="notificationsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                5+
+                            </span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="notificationsDropdown">
+                            <li><h6 class="dropdown-header">Notifications</h6></li>
+                            <li><a class="dropdown-item" href="#">New booking request</a></li>
+                            <li><a class="dropdown-item" href="#">Driver #103 canceled a ride</a></li>
+                            <li><a class="dropdown-item" href="#">3 new customer registrations</a></li>
+                            <li><a class="dropdown-item" href="#">Payment received from booking #9834</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item text-center" href="#">View all notifications</a></li>
+                        </ul>
+                    </div>
+                    <div class="dropdown">
+                        <button class="btn d-flex align-items-center" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            <img src="/api/placeholder/40/40" class="user-avatar" alt="Admin User">
+                            <div class="d-none d-sm-block">
+                                <div class="fw-bold">Admin User</div>
+                                <div class="small text-muted">System Administrator</div>
+                            </div>
+                            <i class="fas fa-chevron-down ms-2"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i> My Profile</a></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i> Account Settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#"><i class="fas fa-sign-out-alt me-2"></i> Logout</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content Wrapper -->
+            <div class="content-wrapper">
+                <!-- Dashboard Overview -->
+                <div class="row mb-4">
+                    <div class="col-md-6">
+                        <h2 class="mb-0">Dashboard</h2>
+                        <p class="text-muted">Welcome back, Admin User</p>
+                    </div>
+                    <div class="col-md-6 text-md-end">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-outline-secondary">
+                                <i class="fas fa-calendar me-2"></i> Mar 1, 2025
+                            </button>
+                            <button type="button" class="btn btn-yellow">
+                                <i class="fas fa-download me-2"></i> Download Reports
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Stats Cards -->
+                <div class="row">
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-primary">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>236</h4>
+                                <p>New Bookings Today</p>
+                                <div class="stat-progress">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success small">
+                                            <i class="fas fa-arrow-up"></i> 18% from yesterday
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-success">
+                                <i class="fas fa-route"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>182</h4>
+                                <p>Active Rides</p>
+                                <div class="stat-progress">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success small">
+                                            <i class="fas fa-arrow-up"></i> 12% from last week
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-warning">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>68</h4>
+                                <p>Available Drivers</p>
+                                <div class="stat-progress">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-danger small">
+                                            <i class="fas fa-arrow-down"></i> 5% from yesterday
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon bg-danger">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="stat-info">
+                                <h4>₹78,520</h4>
+                                <p>Revenue Today</p>
+                                <div class="stat-progress">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="text-success small">
+                                            <i class="fas fa-arrow-up"></i> 22% from yesterday
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Charts Row -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Booking Performance</h5>
+                                <div class="btn-group">
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Week</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary active">Month</button>
+                                    <button type="button" class="btn btn-sm btn-outline-secondary">Year</button>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="bookingChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Booking Types</h5>
+                                <button class="btn btn-sm btn-outline-secondary">
+                                    <i class="fas fa-filter"></i>
+                                </button>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="bookingTypeChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Recent Bookings & Driver Performance -->
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Recent Bookings</h5>
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View All</a>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="data-table table">
+                                    <thead>
+                                        <tr>
+                                            <th>Booking ID</th>
+                                            <th>Customer</th>
+                                            <th>Pickup / Destination</th>
+                                            <th>Date & Time</th>
+                                            <th>Status</th>
+                                            <th>Amount</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>#MCB12345</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/api/placeholder/40/40" class="user-avatar" alt="Customer">
+                                                    <div>
+                                                        <div class="fw-bold">Rajitha Fernando</div>
+                                                        <div class="small text-muted">+94 71 234 5678</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>Galle Face Hotel</div>
+                                                <div class="small text-muted">Bandaranaike Airport</div>
+                                            </td>
+                                            <td>
+                                                <div>Mar 1, 2025</div>
+                                                <div class="small text-muted">09:15 AM</div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-warning">In Progress</span>
+                                            </td>
+                                            <td>₹3,250</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownAction1" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownAction1">
+                                                        <li><a class="dropdown-item" href="#"><i class="fas fa-eye me-2"></i> View Details</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="fas fa-edit me-2"></i> Edit</a></li>
+                                                        <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-times-circle me-2"></i> Cancel</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#MCB12344</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/api/placeholder/40/40" class="user-avatar" alt="Customer">
+                                                    <div>
+                                                        <div class="fw-bold">Samadhi Gunawardena</div>
+                                                        <div class="small text-muted">+94 77 987 6543</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>Colombo City Centre</div>
+                                                <div class="small text-muted">Mount Lavinia Hotel</div>
+                                            </td>
+                                            <td>
+                                                <div>Mar 1, 2025</div>
+                                                <div class="small text-muted">08:45 AM</div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-success">Completed</span>
+                                            </td>
+                                            <td>₹1,850</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownAction2" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownAction2">
+                                                        <li><a class="dropdown-item" href="#"><i class="fas fa-eye me-2"></i> View Details</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="fas fa-file-invoice me-2"></i> View Invoice</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>#MCB12343</td>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <img src="/api/placeholder/40/40" class="user-avatar" alt="Customer">
+                                                    <div>
+                                                        <div class="fw-bold">Dilan Perera</div>
+                                                        <div class="small text-muted">+94 76 345 6789</div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div>Negombo</div>
+                                                <div class="small text-muted">Kandy</div>
+                                            </td>
+                                            <td>
+                                                <div>Feb 28, 2025</div>
+                                                <div class="small text-muted">04:30 PM</div>
+                                            </td>
+                                            <td>
+                                                <span class="badge bg-danger">Cancelled</span>
+                                            </td>
+                                            <td>₹7,500</td>
+                                            <td>
+                                                <div class="dropdown">
+                                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownAction3" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        Action
+                                                    </button>
+                                                    <ul class="dropdown-menu" aria-labelledby="dropdownAction3">
+                                                        <li><a class="dropdown-item" href="#"><i class="fas fa-eye me-2"></i> View Details</a></li>
+                                                        <li><a class="dropdown-item" href="#"><i class="fas fa-redo me-2"></i> Reschedule</a></li>
+                                                    </ul>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Top Drivers</h5>
+                                <a href="#" class="btn btn-sm btn-outline-secondary">View All</a>
+                            </div>
+                            <div class="driver-list">
+                                <div class="card mb-3">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex align-items-center">
+                                            <img src="/api/placeholder/40/40" class="user-avatar" alt="Driver">
+                                            <div class="ms-2">
+                                                <h6 class="mb-0">Sunil Wickramasinghe</h6>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-warning me-1">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star-half-alt"></i>
+                                                    </div>
+                                                    <span class="small text-muted">4.5</span>
+                                                </div>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <span class="badge bg-success">Active</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="small">
+                                                <i class="fas fa-car text-muted me-1"></i> Toyota Prius - ABC1234
+                                            </div>
+                                            <div class="small">
+                                                <i class="fas fa-route text-muted me-1"></i> 132 trips
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-3">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex align-items-center">
+                                            <img src="/api/placeholder/40/40" class="user-avatar" alt="Driver">
+                                            <div class="ms-2">
+                                                <h6 class="mb-0">Kumari Jayawardena</h6>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-warning me-1">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                    </div>
+                                                    <span class="small text-muted">5.0</span>
+                                                </div>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <span class="badge bg-success">Active</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="small">
+                                                <i class="fas fa-car text-muted me-1"></i> Honda Civic - XYZ7890
+                                            </div>
+                                            <div class="small">
+                                                <i class="fas fa-route text-muted me-1"></i> 98 trips
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card mb-3">
+                                    <div class="card-body p-3">
+                                        <div class="d-flex align-items-center">
+                                            <img src="/api/placeholder/40/40" class="user-avatar" alt="Driver">
+                                            <div class="ms-2">
+                                                <h6 class="mb-0">Ajith Fernando</h6>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="text-warning me-1">
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="fas fa-star"></i>
+                                                        <i class="far fa-star"></i>
+                                                    </div>
+                                                    <span class="small text-muted">4.0</span>
+                                                </div>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <span class="badge bg-secondary">Off Duty</span>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex justify-content-between mt-2">
+                                            <div class="small">
+                                                <i class="fas fa-car text-muted me-1"></i> Suzuki Swift - DEF5678
+                                            </div>
+                                            <div class="small">
+                                                <i class="fas fa-route text-muted me-1"></i> 87 trips
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="dashboard-card">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h5 class="mb-0">Customer Ratings</h5>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="dropdownPeriod" data-bs-toggle="dropdown" aria-expanded="false">
+                                        This Month
+                                    </button>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownPeriod">
+                                        <li><a class="dropdown-item" href="#">Today</a></li>
+                                        <li><a class="dropdown-item" href="#">This Week</a></li>
+                                        <li><a class="dropdown-item" href="#">This Month</a></li>
+                                        <li><a class="dropdown-item" href="#">Last 3 Months</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="chart-container">
+                                <canvas id="ratingChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.min.js"></script>
+    
     <script>
-        function bookVehicle(vehicleName) {
-            document.getElementById('vehicle').value = vehicleName;
-        }
-
-        document.getElementById('booking-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const vehicle = document.getElementById('vehicle').value;
-            const date = document.getElementById('date').value;
-            if (vehicle && date) {
-                const table = document.getElementById('booking-table').getElementsByTagName('tbody')[0];
-                const row = table.insertRow();
-                row.innerHTML = `<td>${vehicle}</td><td>${date}</td><td><button class='btn btn-danger btn-sm' onclick='cancelBooking(this)'>Cancel</button></td>`;
-                document.getElementById('booking-form').reset();
+        // Toggle Sidebar
+        document.getElementById('sidebarToggle').addEventListener('click', function() {
+            document.getElementById('sidebar').classList.toggle('show');
+            document.getElementById('mainContent').classList.toggle('push');
+        });
+        
+        // Booking Performance Chart
+        const bookingCtx = document.getElementById('bookingChart').getContext('2d');
+        const bookingChart = new Chart(bookingCtx, {
+            type: 'line',
+            data: {
+                labels: ['1 Mar', '2 Mar', '3 Mar', '4 Mar', '5 Mar', '6 Mar', '7 Mar', '8 Mar', '9 Mar', '10 Mar', '11 Mar', '12 Mar', '13 Mar', '14 Mar'],
+                datasets: [{
+                    label: 'Bookings',
+                    data: [185, 210, 195, 230, 255, 240, 260, 270, 235, 245, 250, 280, 290, 310],
+                    backgroundColor: 'rgba(0, 123, 255, 0.1)',
+                    borderColor: 'rgba(0, 123, 255, 1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true
+                }, {
+                    label: 'Completed Rides',
+                    data: [160, 190, 170, 195, 230, 210, 225, 245, 210, 225, 235, 265, 270, 290],
+                    backgroundColor: 'rgba(40, 167, 69, 0.1)',
+                    borderColor: 'rgba(40, 167, 69, 1)',
+                    borderWidth: 3,
+                    tension: 0.4,
+                    fill: true
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top',
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        min: 150,
+                        grid: {
+                            borderDash: [5, 5]
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
             }
         });
         
-        function cancelBooking(button) {
-            const row = button.closest('tr');
-            row.remove();
-        }
+        // Booking Types Chart
+        const bookingTypeCtx = document.getElementById('bookingTypeChart').getContext('2d');
+        const bookingTypeChart = new Chart(bookingTypeCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Standard', 'Premium', 'Airport', 'Hourly'],
+                datasets: [{
+                    data: [45, 25, 20, 10],
+                    backgroundColor: [
+                        'rgba(0, 123, 255, 0.8)',
+                        'rgba(40, 167, 69, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(220, 53, 69, 0.8)'
+                    ],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                },
+                cutout: '70%'
+            }
+        });
+        
+        // Rating Chart
+        const ratingCtx = document.getElementById('ratingChart').getContext('2d');
+        const ratingChart = new Chart(ratingCtx, {
+            type: 'bar',
+            data: {
+                labels: ['5★', '4★', '3★', '2★', '1★'],
+                datasets: [{
+                    label: 'Reviews',
+                    data: [450, 320, 80, 40, 20],
+                    backgroundColor: [
+                        'rgba(40, 167, 69, 0.8)',
+                        'rgba(0, 123, 255, 0.8)',
+                        'rgba(255, 193, 7, 0.8)',
+                        'rgba(255, 139, 43, 0.8)',
+                        'rgba(220, 53, 69, 0.8)'
+                    ]
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        grid: {
+                            borderDash: [5, 5]
+                        }
+                    },
+                    x: {
+                        grid: {
+                            display: false
+                        }
+                    }
+                }
+            }
+        });
     </script>
-  <footer class="mt-5" style="background-color: #343a40; color: #fff; padding: 20px 0; margin-top: 20px;">
-  <hr style="border-top: 1px solid #fff; margin-bottom: 10px;">
-  <p style="margin: 0; text-align: center; font-size: 0.9rem;">
-    &copy; 2023 MegaCityCab. All rights reserved.
-  </p>
-  <p style="margin: 5px 0; text-align: center; font-size: 0.9rem;">
-    Email: info@megacitycab.com, support@megacitycab.com | Phone: +1-555-123-4567, +1-555-765-4321
-  </p>
-</footer>
-
-    
 </body>
 </html>

@@ -42,7 +42,8 @@ public class BookingDao {
     public List<Booking> getBookings() throws SQLException {
         List<Booking> bookings = new ArrayList<>();
         String sql = """
-            SELECT b.id, b.booking_date, b.customer_id, v.vehicle_name, b.pickup_location, b.dropoff_location
+            SELECT b.id, b.booking_date, b.customer_id, v.vehicle_name, v.id as vehicle_id, 
+                   b.pickup_location, b.dropoff_location
             FROM carbooking b
             JOIN vehicles v ON b.vehicle = v.id
         """;
@@ -56,7 +57,8 @@ public class BookingDao {
                 booking.setBookingId(rs.getInt("id"));
                 booking.setBookingDate(rs.getDate("booking_date"));
                 booking.setCustomerId(rs.getInt("customer_id"));
-                booking.setVehicle(rs.getString("vehicle_name"));  
+                booking.setVehicle(rs.getString("vehicle_name")); 
+                booking.setVehicleId(rs.getInt("vehicle_id"));
                 booking.setPickupLocation(rs.getString("pickup_location"));
                 booking.setDropoffLocation(rs.getString("dropoff_location"));
 
@@ -66,6 +68,7 @@ public class BookingDao {
         }
         return bookings;
     }
+
 
     
     public boolean deleteBooking(int bookingId) throws SQLException {

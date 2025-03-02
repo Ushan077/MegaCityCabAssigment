@@ -9,7 +9,209 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="loginstyle.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <style>body {
+  background-image: url('https://plus.unsplash.com/premium_photo-1736464269768-06b84d532420?q=80&w=1932&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.login-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: row;
+  padding: 40px 20px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Welcome message */
+.welcome-message {
+  text-align: left;
+  margin-top: 40px;
+  margin-right: 40px;
+  color: white;
+  animation: fadeIn 1.2s ease-out;
+}
+
+.welcome-message h2 {
+  font-size: 4rem;
+  font-weight: bold;
+  color: #d3d3d3;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+.welcome-message h1 {
+  font-size: 6rem;
+  color: #d3d3d3;
+  font-weight: bold;
+  margin-bottom: 30px;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+}
+
+.login-container {
+  width: 350px;
+  margin-left: 400px;
+  background-color: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  animation: slideUp 0.8s ease-out;
+}
+
+.login-container h3 {
+  font-size: 2rem;
+  margin-bottom: 25px;
+  font-weight: 600;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.login-container .form-control {
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: 8px;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}
+
+.login-container .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.login-container .form-control:focus {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.login-container .form-label {
+  margin-bottom: 8px;
+  font-weight: 500;
+  display: block;
+  transition: transform 0.2s ease, font-size 0.2s ease;
+}
+
+.login-container .form-control:focus + .form-label {
+  transform: translateY(-20px);
+  font-size: 0.85rem;
+}
+
+.login-container .btn-primary {
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  width: 100%;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.login-container .btn-primary:hover {
+  background-color: #084298;
+  transform: scale(1.05);
+}
+
+.login-container a.text-white {
+  text-decoration: underline;
+  color: #fff;
+  transition: color 0.2s ease;
+}
+
+.login-container a.text-white:hover {
+  color: #f0f0f0;
+}
+
+.alert {
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+  background-color: rgba(220, 53, 69, 0.2);
+  border: 1px solid rgba(220, 53, 69, 0.3);
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.alert.show {
+  opacity: 1;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Icon styling */
+.bi {
+  margin-right: 8px;
+}
+
+/* Footer styling */
+footer {
+  background-color: rgba(52, 58, 64, 0.8) !important;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive design */
+@media (max-width: 1200px) {
+  .login-wrapper {
+    flex-direction: column;
+    padding: 20px;
+  }
+  
+  .welcome-message {
+    margin-right: 0;
+    margin-bottom: 30px;
+    text-align: center;
+  }
+  
+  .welcome-message h1 {
+    font-size: 4rem;
+  }
+  
+  .welcome-message h2 {
+    font-size: 2.5rem;
+  }
+  
+  .login-container {
+    margin-left: 0;
+    width: 90%;
+    max-width: 350px;
+  }
+}</style>
 </head>
 <body>
   <div class="d-flex justify-content-center align-items-center vh-100">

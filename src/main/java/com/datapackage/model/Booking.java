@@ -7,6 +7,7 @@ public class Booking {
     private int bookingId;
     private Date bookingDate;
     private int customerId;
+    private int vehicleId; 
     private String vehicle;
     private String pickupLocation;
     private String dropoffLocation;
@@ -54,10 +55,16 @@ public class Booking {
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
-    
+    public int getVehicleId() {
+        return vehicleId;
+    }
     public String getVehicle() {
         return vehicle;
     }
+    public void setVehicleId(int vehicleId) {
+        this.vehicleId = vehicleId;
+    }
+
     public void setVehicle(String vehicle) {
         this.vehicle = vehicle;
     }
