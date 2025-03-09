@@ -651,7 +651,7 @@ body {
   </footer>
   
   <script>
-    // Helper function to get a cookie by name.
+
     function getCookie(name) {
       const cookieArr = document.cookie.split(';');
       for (let cookie of cookieArr) {
@@ -663,7 +663,6 @@ body {
       return "";
     }
 
-    // Load user data from cookies and update the UI.
     function loadUserData() {
       const userName = getCookie("name") || "Guest";
       const userID = getCookie("userID") || "N/A";
@@ -671,22 +670,21 @@ body {
       document.getElementById("userName").textContent = userName;
       document.getElementById("userID").textContent = userID;
 
-      // Save data to session storage for future use.
+
       sessionStorage.setItem("employeeName", userName);
       sessionStorage.setItem("employeeID", userID);
 
-      // Correct URL for BillMake page.
+
       document.getElementById("goToBillPage").href = "BillMake.jsp?name=" + encodeURIComponent(userName) + "&id=" + encodeURIComponent(userID);
     }
 
-    // Fetch booking data from the server and populate the table.
     function loadBookings() {
       fetch("EmployeeFetchBookingsServlet")
         .then(response => response.json())
         .then(bookings => {
-          console.log("Fetched bookings:", bookings); // Debug log
+          console.log("Fetched bookings:", bookings); 
           
-          // Update booking count display.
+ 
           document.getElementById("bookingCount").textContent = "Total Bookings: " + (bookings ? bookings.length : 0);
           
           const tableBody = document.getElementById("bookingTableBody");
@@ -695,7 +693,7 @@ body {
           } else {
             let html = "";
             bookings.forEach(b => {
-              console.log("Booking data:", b); // Debug log for each booking
+              console.log("Booking data:", b); 
               html += "<tr>";
               html += "<td>" + (b.bookingId || "N/A") + "</td>";
               html += "<td>" + (b.bookingDate || "N/A") + "</td>";
@@ -713,12 +711,10 @@ body {
         });
     }
 
-    // Initialize the page once the DOM is loaded.
     document.addEventListener("DOMContentLoaded", function() {
       loadUserData();
       loadBookings();
-      
-      // Theme selector functionality.
+
       const themeSelector = document.getElementById("themeSelector");
       themeSelector.addEventListener("change", function() {
         document.body.classList.remove("dark-mode", "night-mode");

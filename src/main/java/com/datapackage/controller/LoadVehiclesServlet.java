@@ -9,8 +9,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import com.datapackage.dao.VehiclepriceDAO;
 import com.datapackage.model.Vehicleprice;
-import com.example.dao.VehiclepriceDAO;
 import com.google.gson.Gson;
 
 /**

@@ -1,4 +1,4 @@
-package com.example.dao;
+package com.datapackage.dao;
 
 import com.datapackage.model.Vehicleprice;
 import java.sql.*;

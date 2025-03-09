@@ -37,7 +37,7 @@
     <div class="row">
       <div class="col-md-2 sidebar">
         <h5 class="text-center text-white">Menu</h5>
-        <a href="adminhome.html"><i class="fas fa-home"></i> Dashboard</a>
+        <a href="adminhome.jsp"><i class="fas fa-home"></i> Dashboard</a>
         <a href="usersmanage.jsp"><i class="fas fa-users"></i> Users</a>
         <a href="managevehivehicles.jsp"><i class="fas fa-car"></i> Vehicles</a>
         <a href="adminBillView.jsp"><i class="fas fa-file-invoice-dollar"></i> Bill Manage</a>
@@ -120,7 +120,7 @@
         .catch(error => console.error("Error loading complaints:", error));
     }
     
-    // Apply filter when dropdown changes
+
     function applyFilter() {
       renderComplaints();
     }

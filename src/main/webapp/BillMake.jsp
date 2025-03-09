@@ -265,7 +265,7 @@
       calculateTotal();
     });
     
-    // Calculate the total amount based on kilometers and rate per KM.
+ 
     function calculateTotal() {
       const km = parseFloat(document.getElementById("kilometers").value) || 0;
       const rate = parseFloat(document.getElementById("perKmRate").value) || 0;
